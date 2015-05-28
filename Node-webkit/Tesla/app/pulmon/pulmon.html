@@ -1,0 +1,17 @@
+<center ng-show="cola == []">No hay examenes que realizar</center>
+<button ng-click="refrescar()" class="btn btn-default">Refrescar</button>
+<accordion class="col-md-8 col-md-offset-2">
+	<accordion-group ng-repeat="item in cola"  is-open="item.open" >
+		<accordion-heading>
+
+            Examen :  {{item.nombreServicio}}   Paciente: {{item.paciente}}
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+    </accordion-heading>
+      Edad: {{item.edad}}
+      <br>
+      Cantidad: {{item.cantidad}}
+      <br>
+      <i ng-click="terminarServicio($index)" class="btn btn-default pull-right glyphicon glyphicon-ok text-warning"></i>
+      <!-- <i ng-click="imprimir(item)" class="btn btn-default pull-right glyphicon glyphicon-print text-warning"></i> -->
+    </accordion-group>
+</accordion>

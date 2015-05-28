@@ -1,0 +1,24 @@
+<div>
+	<form class="form-inline" name="formReporte" ng-submit="generarReporte()" novalidate>
+		<div  class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="" class=" text-center">Tipo</label>
+				<select class="form-control" name="tipo" ng-model="reporte.tipo">
+					<option value="serviciosNoFacturados" default>Servicios no facturados</option>
+					<option value="facturas" default>Facturas realizadas</option>
+					<option value="servicios" default>Servicios</option>
+				</select>
+			</div>
+			<div class="form-group" ng-show="reporte.tipo == 'facturas'">
+				<label for="" class=" text-center">De</label>
+				<input type="date" class="form-control" name="fecha1"  ng-model="reporte.fecha1"  required>
+			</div>
+			<div class="form-group" ng-show="reporte.tipo == 'facturas'">
+				<label for="" class=" text-center">a</label>
+				<input type="date" class="form-control" name="fecha1"  ng-model="reporte.fecha2" required>
+			</div>
+			
+			<button type="submit" class="btn btn-default">Generar reporte</button>
+		</div>
+	</form>
+</div>

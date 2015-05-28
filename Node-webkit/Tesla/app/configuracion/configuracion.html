@@ -1,0 +1,27 @@
+<div>
+	<div class="col-md-7 col-md-offset-1">
+		<form class="col-md-8" name="formConfiguracion" ng-submit="guardarConfiguracion(configuracion)" >
+			
+				<!-- <div style="display: inline-block;vertical-align: top; margin: 0 20px" class="form-group" ng-repeat="item in config">
+					<label  >{{item.titulo}}</label>
+					<input type="{{item.tipo}}"  ng-class="{'form-control' : item.tipo != 'checkbox'}" ng-model="item.dato">
+				</div> -->
+			<div class="form-group">
+				<label for="">{{configuracion.maxServiceFac.titulo}}</label>
+				<input type="number" class="form-control" ng-model="configuracion.maxServiceFac.dato">
+			</div>
+			<div class="checkbox">
+				<label for=""><input type="checkbox" ng-model="configuracion.cambioNombre.dato"> {{configuracion.cambioNombre.titulo}}</label>
+				
+			</div>
+			<div class="checkbox">
+				<label for=""><input type="checkbox" ng-model="configuracion.cambioPrecio.dato">{{configuracion.cambioPrecio.titulo}}</label>
+			</div>
+			<div class="form-group">
+				<label for="">{{configuracion.tituloVentana.titulo}}</label>
+				<input type="text" class="form-control" ng-model="configuracion.tituloVentana.dato">
+			</div>
+			<button  class="btn btn-default" type="submit">Guardar</button>
+		</form>
+	</div>
+</div>

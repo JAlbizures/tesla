@@ -1,0 +1,24 @@
+{
+  "name": "Tesla",
+  "version": "0.0.1",
+  "description": "Sistema de facturacion y otros",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Albizures",
+  "license": "MIT",
+  "window": {
+    "title": "Tesla",
+    "icon": "icon.PNG",
+    "toolbar": true,
+    "frame": true,
+    "resizable": true,
+    "min_width": 1300,
+    "min_height": 700
+  },
+  "dependencies": {
+    "edge": "^0.10.1",
+    "pdfkit": "^0.7.0"
+  }
+}

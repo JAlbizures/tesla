@@ -3,3 +3,23 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
+/Server_Deploy/node_modules/
+/Client_Deploy/
+/Node-webkit/Tesla.nw
+/Node-webkit/pdf.dll
+/Node-webkit/nwsnapshot.exe
+/Node-webkit/nwjc.exe
+/Node-webkit/estilo.especial.xxx
+/Node-webkit/ffmpegsumo.dll
+/Node-webkit/icudt.dll
+/Node-webkit/icudtl.dat
+/Node-webkit/libEGL.dll
+/Node-webkit/libGLESv2.dll
+/Node-webkit/nw.exe
+/Node-webkit/nw.pak
+/Node-webkit/d3dcompiler_47.dll
+/Node-webkit/credits.html
+/Node-webkit/Tesla/bower_components/
+/Node-webkit/Tesla/node_modules/
+/Node-webkit/locales/
+/Server_Deploy.rar

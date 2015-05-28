@@ -1,0 +1,58 @@
+<script type="text/ng-template" id="estilo.html" >
+    <div>
+      <div class="modal-header">
+        <h3 class="modal-title">Elija el estilo que quiere</h3>
+      </div>
+      <div class="modal-body">  
+         
+        <form class="form-inline" style="display : inline-block;" name="formCambiarCss">
+          <div class="">
+            <div class="form-group"  novalidate>
+              <label for="">tamaño de letra de titulos</label>
+              <input type="number" min="15" max="27"  class="form-control" name="tamanoTitulo"  ng-model="tamanoTitulo" required>
+            </div>
+          </div>
+          <div class="">
+          <div class="form-group"  novalidate>
+              <label for="" >Color de fondo</label>
+              <select class="form-control" name="colorFondo" ng-model="colorFondo" required>
+                <option value="#000000">Negro</option>
+                <option value="#ffffff">Blanco</option>
+                <option value="#3366FF">Azul</option>
+              </select>
+              
+          </div>
+          </div>
+          <div class="">
+          <div class="form-group"  novalidate>
+              <label for="" >Color de fuente</label>
+              <select class="form-control" name="colorFuente" ng-model="colorFuente" required>
+                <option value="#000000">Negro</option>
+                <option value="#ffffff">Blanco</option>
+                <option value="#3366FF">Azul</option>
+              </select>
+              
+          </div>
+          </div>
+        </form>
+      <div class="modal-footer">
+          <button class="btn btn-primary" ng-disabled="!formCambiarCss.$valid" min="15" ng-click="ok()">Guardar</button>
+          <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+      </div>
+    </div>  
+</script>
+<nav class="navbar navbar-default" ng-controller="NavbarCtrl">
+  <div class="  ">
+   <ul class="nav navbar-nav" style="width:100%">
+        <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+        <!-- <li><a href="#">Link</a></li> -->
+        <!-- <li class="dropdown"> -->
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.path)}">
+            <a ng-href="#{{item.path}}">{{item.name | titleCase}}</a>
+        </li>
+        <!-- <li class="dropdown"> -->
+        <li ng-show="menu.length > 0" class="pull-right"> <a ng-click="cerrarSesion()" >Cerrar Sesion</a></li>
+        <li class="pull-right"> <a ng-click="cambiarEstilo()" >Estilo</a></li>
+    </ul>
+  </div>
+</nav>

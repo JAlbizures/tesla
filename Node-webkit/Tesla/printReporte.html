@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="appCtrl" lang="en">
+<head > 
+	<meta charset="UTF-8">
+	<title>Reporte</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<style>
+		[ng-click],
+		[data-ng-click],
+		[x-ng-click] {
+		    cursor: pointer;
+		}
+</style>
+</head>
+<body>
+	<span class="pull-left">{{fecha | date:'dd/MM/yyyy'}}</span>
+	<button ng-click="imprimir()" ng-show="estado" class="pull-right btn btn-default">Imprimir</button>
+	<div ng-show="reporte.tipo == 'facturas'">
+		<div style="text-align:center;"><p>-Reporte de {{reporte.fecha1}} a {{reporte.fecha2}} de {{reporte.tipo}}-</p></div>
+		<table class="table table-striped servicos-factura">
+			<thead>
+				<th>Serie</th>
+				<th>No.</th>
+				<th>Fecha</th>
+				<th>Nombre</th>
+				<th>Paciente</th>
+				<th>Direccion</th>
+				<th>Servicio</th>
+				<th>Precio</th>
+				<th>Subtotal</th>
+			</thead>
+			<tbody >
+				<tr ng-repeat="item in data">
+					<td>{{item.serie}}</td>
+					<td>{{item.numero}}</td>
+					<td>{{item.fecha | date:'dd/MM/yyyy'}}</td>
+					<td>{{item.nombre}}</td>
+					<td>{{item.paciente}}</td>
+					<td>{{item.direccion}}</td>
+					<td>{{item.nombreServicio}}</td>
+					<td>{{item.precio |  currency:"Q"}}</td>
+					<td>{{item.precio*item.cantidad | currency:"Q"}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-show="reporte.tipo == 'servicios'">
+		<div style="text-align:center;"><p>-Reporte de Servicios-</p></div>
+		<table class="table table-striped servicos-factura">
+			<thead>
+				<th >No.</th>
+				<th>ID</th>
+				<th ng-click="setOrder('nombre')">Nombre <span  ng-class="{'glyphicon glyphicon-triangle-bottom' : order=='nombre' && revers,'glyphicon glyphicon-triangle-top' : order=='nombre' && !revers}"></span></th>
+				<th>Numero Serial</th>
+				<th ng-click="setOrder('tipo')">Categoria  <span  ng-class="{'glyphicon glyphicon-triangle-bottom' : order=='tipo' && revers,'glyphicon glyphicon-triangle-top' : order=='tipo' && !revers}"></span></th>
+			</thead>
+			<tbody>
+				<tr  ng-repeat="item in data | orderBy : order : revers">
+					<td>{{$index+1}}</td>
+					<td>{{item.idServicio}}</td>
+					<td>{{item.nombre}}</td>
+					<td>{{item.numeroserial}}</td>
+					<td>{{item.tipo}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-show="reporte.tipo == 'serviciosNoFacturados'">
+		<div style="text-align:center;"><p>-Reporte de Servicios no facturados-</p></div>
+		<table class="table table-striped servicos-factura">
+			<thead>
+				<th>Nombre</th>
+				<th>Precio</th>
+				<th>Cantidad</th>
+				<th>Numero Serial</th>
+			</thead>
+			<tbody>
+				<tr  ng-repeat="item in data">
+					<td>{{item.nombre}}</td>
+					<td>{{item.precio |  currency:"Q"}}</td>
+					<td>{{item.cantidad}}</td>
+					<td>{{item.numeroserial}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="app/printReporte.js"></script>
+</body>
+</html>

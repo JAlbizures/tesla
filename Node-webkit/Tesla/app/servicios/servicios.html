@@ -1,0 +1,106 @@
+
+<script type="text/ng-template" id="modalServicePrecio.html" >
+	<div>
+		<div class="modal-header">
+			<h3 class="modal-title">Especifique el precio por la foma de pago</h3>
+		</div>
+		<div class="modal-body">	
+			<div ng-repeat="item in precios" style="display: inline-block">
+				{{item.nombre}} <input type="text" class="form-control" style="width:100px;margin-right:5px" ng-model="item.precio">
+			</div>
+		<div class="modal-footer">
+		    <button class="btn btn-primary" ng-click="ok()">Aceptar</button>
+		    <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+		</div>
+	</div>	
+</script>
+
+<div class="">
+  <div class="">
+    <div class="col-lg-12">
+		<form class="form-inline" novalidate name="formAgregarServicio" ng-submit="agregarServicio(servicio)" ng-show="estado">
+			<div class="form-group" >
+				<label for="" class="block">No serial. </label>
+				<input type="number" style="width:70px" min="0" class="form-control" name="numeroserial"  ng-model="servicio.numeroserial"  placeholder="No." required>
+			</div>
+			<div class="form-group">
+				<label for="" class="block">Precio</label>
+				<input type="number" step="0.01" class="form-control" name="precio" ng-init="servicio.precio = 1.00" ng-model="servicio.precio"  placeholder="Precio" required>
+			</div>
+			<div class="form-group">
+				<label for="" class="block">Categoria</label>
+				<input type="text" class="form-control" capitalize-first name="tipo" ng-model="servicio.tipo"  placeholder="Categoria" required>
+			</div>
+			<div class="form-group"  novalidate>
+				<label for="" class="block">Nombre</label>
+				<input type="text" class="form-control" capitalize-first name="nombre"  ng-model="servicio.nombre"  placeholder="Nombre" required>
+			</div>
+			<div class="form-group">
+				<label for="" class="block">Tecnico</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tecnico" ng-init="servicio.tecnico = false" ng-model="servicio.tecnico"  placeholder="Tecnico" >
+			</div>
+			<button type="submit"  class="btn btn-default bottom" ng-disabled="!formAgregarServicio.$valid">Agregar servicio</button>
+
+		</form>
+		<form class="form-inline"  name="formEditarServicio"  ng-show="!estado">
+			<div class="form-group" >
+				<label for="" class="block">No Serial. </label>
+				<input type="number" style="width:70px" min="0" class="form-control" name="numeroserial"  ng-model="updateServicio.numeroserial"  placeholder="No." required>
+			</div>
+			<div class="form-group">
+				<label for="" class="block">Categoria</label>
+				<input type="text" class="form-control" capitalize-first name="tipo" ng-model="updateServicio.tipo"  placeholder="Categoria" required>
+			</div>
+			<div class="form-group"  novalidate>
+				<label for="" class="block">Nombre</label>
+				<input type="text" class="form-control" capitalize-first name="nombre" ng-model="updateServicio.nombre"  placeholder="Nombre" required>
+			</div>
+			<div class="form-group">
+				<label for="" class="block">Tecnico</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tecnico" ng-model="updateServicio.tecnico"  placeholder="Tecnico" >
+			</div>
+			<!--<div class="form-group">
+				<label for="" class="block">Precio</label>
+				<input type="number" step="0.01" class="form-control" name="precio" ng-model="updateServicio.precio"  placeholder="Precio" required>
+			</div>-->
+			<button type="submit" class="btn btn-success bottom" ng-click="terminarEdit(updateServicio)" ng-disabled="!formEditarServicio.$valid">Aceptar</button>
+			<button  ng-click="estado=true" class="btn btn-danger bottom" >Cancelar</button>
+		</form>
+
+		<hr>
+		<div class="form-group"><label for="" >Buscar</label> <input class="form-control" style="width: auto;display : inline-block" type="text" ng-model="servicioBusqueda"></div>
+		<table class="table table-striped">
+			<thead>
+				<th>ID</th>
+				<th>No. serial</th>
+				<th>Categoria</th>
+				<th>Nombre</th>
+				<th>Tecnico</th>
+			</thead>
+			<tbody >
+				<tr id="{{item.idservicios}}" ng-repeat="item in servicios | searchfilter:servicioBusqueda" > 
+					<td >{{item.idServicio}}</td>
+					<td>{{item.numeroserial}}</td> 
+					<td>{{item.tipo  | titleCase}}</td> 
+					<td>{{item.nombre  | titleCase}}</td>
+					<td> <i ng-class="{'glyphicon glyphicon-ok' : item.tecnico}"></i></td> 
+					<!-- <td>{{item.precio |  currency:"Q"}}</td>  -->
+					<td>
+						<button class="btn btn-success" ng-click="editar(item)">
+							Editar
+						</button>
+						<button class="btn btn-warning" ng-click="editarPrecio(item)">
+							Editar precio
+						</button>
+						<button class="btn btn-danger" ng-click="eliminar(item.idServicio)">
+							Eliminar
+						</button>
+					</td> 
+				</tr>
+				</div> 
+			</tbody>
+		</table>	
+    </div>
+  </div>
+</div>
+

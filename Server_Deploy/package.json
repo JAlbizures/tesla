@@ -1,0 +1,21 @@
+{
+  "name": "teslaServe",
+  "version": "0.0.1",
+  "description": "servidores rest para el sistemas de facturacion tesla",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Albizures",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.0",
+    "express": "^4.12.0",
+    "jsreport": "^0.5.0",
+    "method-override": "^2.3.1",
+    "mysql": "^2.5.5",
+    "restify": "^2.8.5",
+    "socket.io": "^1.3.5",
+    "sql": "^0.47.0"
+  }
+}

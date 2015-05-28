@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!--<base href="/">-->
+	<title></title>
+	<meta name="description" content="Eslogan que llame la atención.">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"> -->
+	<link rel="stylesheet" href="bower_components/angular-ui-grid/ng-grid.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">
+	
+	<!-- <link rel="stylesheet" href="bootstrap.black.min.css">
+	<link rel="stylesheet" href="./estilo.especial.css"> -->
+	<link rel="stylesheet" href="app/estilo.css">
+</head>
+<body ng-app="angularApp">
+	<div ng-include='"components/navbar/navbar.html"'></div>
+	<div ui-view="" class="view"></div>
+
+	<!--  Vendor  scripts-->
+	<script>
+		var gui = require('nw.gui');
+		var win = gui.Window.get();	
+		win.maximize();
+//		var pdf = require('pdfkit');
+//		var edge = require('edge');
+		var fs = require('fs');
+	    var path = require('path');
+	    var execPath = path.dirname(process.execPath);
+		
+	</script>
+	<script src="app/numerToWords.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/angular-ui-grid/ng-grid.js"></script>
+	<!--<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>-->
+	<script src="bower_components/socket.io-client/socket.io.js"></script>
+	<script src="bower_components/angular-socket-io/socket.js"></script>
+	<script>
+		$('head').append('<link rel="stylesheet" href="'+execPath+'\\estilo.especial.css" type="text/css" />');
+	</script>
+	<!-- Scripts -->
+	<script src="app/app.js"></script>
+	<script src="app/Auth/Auth.js"></script>
+	<script src="components/navbar/navbar.controller.js"></script>
+	<script src="app/login/login.controller.js"></script>
+	<script src="app/login/login.js"></script>
+	<script src="app/servicios/servicios.controller.js"></script>
+	<script src="app/servicios/servicios.js"></script>
+	<script src="app/servicios/ModalServiciosPrecio.controller.js"></script>
+	<script src="app/factura/factura.controller.js"></script>
+	<script src="app/factura/factura.js"></script>
+	<script src="app/factura/modalService.controller.js"></script>
+	<script src="app/reportes/reportes.controller.js"></script>
+	<script src="app/reportes/reportes.js"></script>
+	<script src="app/usuarios/usuarios.controller.js"></script>
+	<script src="app/usuarios/usuarios.js"></script>
+	<script src="app/pulmon/pulmon.controller.js"></script>
+	<script src="app/pulmon/pulmon.js"></script>
+	<script src="app/configuracion/configuracion.controller.js"></script>
+	<script src="app/configuracion/configuracion.js"></script>
+	<script src="app/formaPago/formaPago.controller.js"></script>
+	<script src="app/formaPago/formaPago.js"></script>
+	<script src="app/estilo/estilo.js"></script>
+	<script src="app/estilo/estilo.controller.js"></script>
+	<!--<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-XXXXX-X');
+		ga('send', 'pageview');
+	</script>-->
+</body>

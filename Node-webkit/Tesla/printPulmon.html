@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="appCtrl" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pulmon</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<style>
+		p{
+			position: absolute;
+			margin: 0;
+			/*font-size: 10px;*/
+		}
+	</style>
+</head>
+<body>
+	<button ng-click="imprimir()" ng-show="estado" class="pull-right btn btn-default">Imprimir</button>
+	<p style="top: 300px;">Paciente {{data.paciente}}</p>
+	<p style="top: 315px;">"{{data.serie}}"</p>
+	<p style="top: 330px;">{{data.numero}}</p>
+	<p style="top: 345px;">{{data.fecha | date:'dd/MM/yyyy'}}</p>
+	<script src="app/numerToWords.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="app/printPulmon.js"></script>
+</body>
+</html>

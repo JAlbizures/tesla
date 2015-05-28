@@ -1,0 +1,76 @@
+table.table{
+    display: block;
+    position: relative;
+    overflow-y: scroll;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 450px;
+    width: auto;
+}
+input{
+    overflow: hidden;
+}
+table.table-modal{
+    display: block;
+    position: relative;
+    overflow-y: scroll;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 300px;
+    width: auto;
+}
+.inline-block{
+    display: inline-block;
+}
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}
+select{
+    padding-right: 0px !important;
+}
+th{
+    padding: 10px;
+}
+    
+.table >thead{
+/*    top: 0;
+    position: absolute;
+    width: 100%;
+    background: white;*/
+}
+td{
+    padding: 10px;
+    vertical-align: middle !important;
+}
+.navbar.navbar-default{
+    border-radius: 0;
+}
+.block{
+    display: block;
+}
+.bottom{
+    vertical-align: bottom;
+}
+.table.table-striped.servicos-factura{
+     height: 300px;
+}
+.modal-backdrop {
+    bottom: 0;
+}
+/*
+.navbar-default{
+    /*background: gray;
+}
+.navbar-nav>li>a{
+    font-size: 20px;
+}
+body{
+    background: black;
+    font-size: 20px;
+    color: white;
+}
+input{
+    background: transparent !important;
+}*/
