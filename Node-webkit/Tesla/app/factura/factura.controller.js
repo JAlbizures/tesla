@@ -1,6 +1,6 @@
 
 angular.module('angularApp')
- 	.controller('FacturaCtrl',function ($state,Auth,$http,$scope, Config,$modal) {
+ 	.controller('FacturaCtrl',function ($state,Auth,$http,$scope, Config,$modal,$rootScope) {
 		Auth.currentUser();
 		$scope.numeroValido = false;
 		$scope.factura = {};
@@ -11,14 +11,14 @@ angular.module('angularApp')
 		$scope.servicios = [];
 		$scope.formaPago = [];
 		$scope.editando = false;
-		$scope.correlativo = [];
+		$scope.correlativo = {};
 		
 		for(index in Config.list){
 			if(Config.list[index].tipo == 'checkbox'){
 				$scope[Config.list[index].nombre] = Config.list[index].dato;
 			}
 		}
-		//console.log('$scope',$scope);
+		console.log('$scope',$scope);
 		//$scope.factura.fecha = Date.now();
 		$scope.newServicio = {};
 		$http.get(Config.path+'/servicios/precios/all')
@@ -33,8 +33,10 @@ angular.module('angularApp')
 			});
 		$http.get(Config.path+'/facturas/correlativo')
 			.success(function (data) {
-				//console.log(data);
-				$scope.correlativo  = data;
+				console.log(data);
+				$scope.factura.numero = data[0].numero_actual;
+				$scope.factura.serie = data[0].serie;
+				//$scope.correlativo  = data;
 			})
 			.error(function (data) {
 				console.log(data);
@@ -64,25 +66,25 @@ angular.module('angularApp')
 			});
 		$scope.$watch('factura.numero',function (newV) {
 			
-			for(item in $scope.correlativo){
-				if($scope.correlativo[item].numero == newV && $scope.correlativo[item].serie == $scope.factura.serie ){
-					$scope.numeroValido = true;
-					break;
-				}else if($scope.correlativo.length == (parseInt(item)+1)){
-					$scope.numeroValido = false;
-				}
-			}
+			// for(item in $scope.correlativo){
+			// 	if($scope.correlativo[item].numero == newV && $scope.correlativo[item].serie == $scope.factura.serie ){
+			// 		$scope.numeroValido = true;
+			// 		break;
+			// 	}else if($scope.correlativo.length == (parseInt(item)+1)){
+			// 		$scope.numeroValido = false;
+			// 	}
+			// }
 		});
 		$scope.$watch('factura.serie',function (newV) {
 			
-			for(item in $scope.correlativo){
-				if($scope.correlativo[item].numero ==  $scope.factura.numero && $scope.correlativo[item].serie == newV ){
-					$scope.numeroValido = true;
-					break;
-				}else if($scope.correlativo.length == (parseInt(item)+1)){
-					$scope.numeroValido = false;
-				}
-			}
+			// for(item in $scope.correlativo){
+			// 	if($scope.correlativo[item].numero ==  $scope.factura.numero && $scope.correlativo[item].serie == newV ){
+			// 		$scope.numeroValido = true;
+			// 		break;
+			// 	}else if($scope.correlativo.length == (parseInt(item)+1)){
+			// 		$scope.numeroValido = false;
+			// 	}
+			// }
 		});
 		$scope.$watch('factura.formaPago',function (newV, oldV) {
 			if(newV !== oldV){
@@ -199,25 +201,34 @@ angular.module('angularApp')
 		}
 		$scope.terminarFactura = function (factura) {
 			factura.faturaDetalle = $scope.serviciosFactura;
+			factura.usuario = $rootScope.currentUser.idUsuarios
 			$http.post(Config.path+'/facturas/crear',factura)
 	  			.success(function (data) {
 	  				//console.log(data);
 	  				if($scope.factura.formaPago.nombre.toLocaleLowerCase() == 'contado'.toLocaleLowerCase()){
-	  					sessionStorage.setItem('dataFactura',JSON.stringify(factura));
-		 				window.open('printFactura.html',{
-		 					"width" : 900,
-		 					"min_width" : 500,
-		 					"max_width" : 1000,
-		 					"toolbar": false,
+
+	  					//sessionStorage.setItem('dataFactura',JSON.stringify(factura));
+		 				var win = gui.Window.open('printFactura.html',{
+		 					"width" : 800,
+		 					"min_width" : 800,
+		 					"max_width" : 800,
+		 					"toolbar": true,
   							"frame": true
 		 				});
+		 				localStorage.dataFactura = JSON.stringify(factura);
+		 				//win.eval(null,'sessionStorage.setItem(\'dataFactura\', \''+JSON.stringify(factura)+'\');')
+		 				win.on('close', function() {
+							this.hide(); // Pretend to be closed already
+							console.log("We're closing...");
+							this.close(true);
+							
+						});
 	  				}
 	  				$scope.correlativo  = data;
 	  				$scope.serviciosFactura = [];
 	  				$scope.factura = {};
 	  				$scope.factura.fecha = dateNow();
 	  				$scope.factura.formaPago = $scope.formaPago[0];
-	  				
 	  			})
 	  			.error(function  (data) {
 	  				console.log(data);

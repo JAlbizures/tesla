@@ -40,10 +40,10 @@
 					<td>{{item.nombre | titleCase}}</td>
 					<!-- <td>{{item.precio |  currency:"Q"}}</td>  -->
 					<td>
-						<button ng-show="item.nombre.toLocaleLowerCase() != 'contado'.toLocaleLowerCase()" class="btn btn-success" ng-click="editar(item)">
+						<button ng-show="item.nombre.toLocaleLowerCase() != 'contado' && item.nombre.toLocaleLowerCase() != 'tarjeta de credito'" class="btn btn-success" ng-click="editar(item)">
 							Editar
 						</button>
-						<button ng-show="item.nombre.toLocaleLowerCase() != 'contado'.toLocaleLowerCase()" class="btn btn-danger" ng-click="eliminar(item.idFormaPago)">
+						<button ng-show="item.nombre.toLocaleLowerCase() != 'contado' && item.nombre.toLocaleLowerCase() != 'tarjeta de credito'" class="btn btn-danger" ng-click="eliminar(item.idFormaPago)">
 							Eliminar
 						</button>
 					</td> 

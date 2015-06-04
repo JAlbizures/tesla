@@ -16,7 +16,7 @@
 						<tr ng-show="precios[item.idServicio][formaPago.idFormaPago] > 0" ng-click="toggleServicio(item)" id="{{item.idServicio}}" ng-repeat="item in servicios | searchfilter:servicioBusqueda" > 
 							<td >{{item.idServicio}}</td>
 							<td >{{item.tipo}}</td>
-							<td>{{item.nombre}}</td> 
+							<td class="td-nombre2">{{item.nombre}}</td> 
 							<td>{{precios[item.idServicio][formaPago.idFormaPago] |  currency:"Q"}}</td> 
 							<td ng-show="seleccionado.idServicio == item.idServicio">X</td>
 						</tr>
@@ -108,28 +108,34 @@
 						<!-- <option ng-repeat="item in formaPago" value="{{item.idFormaPago}}">{{item.nombre}}</option> -->
 					</select>
 				</div>
-				<div class="form-group" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado'" ng-class="{'has-error' : !formAgregarFactura.nit.$valid && serviciosFactura.length != 0}">
+				<div class="form-group" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" ng-class="{'has-error' : !formAgregarFactura.nit.$valid && serviciosFactura.length != 0}">
 					<label for="" class="block">NIT</label>
-					<input type="text" class="form-control" name="nit"  ng-model="factura.nit"  placeholder="NIT" required>
+					<input type="text" style="width : 150px" class="form-control" name="nit"  ng-model="factura.nit"  placeholder="NIT" required>
 				</div>
-				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.serie.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado'">
+				<div class="form-group"  ng-class="{'has-error' : !formAgregarFactura.serie.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
 					<label for="" class="block" >Serie</label>
-					<input type="text" class="form-control" name="serie"  ng-model="factura.serie"  placeholder="Serie" required>
+					<input type="text" ng-disabled="facturacionAuto" style="width : 100px" class="form-control" name="serie"  ng-model="factura.serie"  placeholder="Serie" required>
 				</div>
-				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.numero.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado'">
+				<div class="form-group"  ng-class="{'has-error' : !formAgregarFactura.numero.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
 					<label for="" class="block" >No.</label>
-					<input type="number" class="form-control" name="numero"  ng-model="factura.numero"  placeholder="No." required>
+					<input type="number" ng-disabled="facturacionAuto" style="width : 100px" class="form-control" name="numero"  ng-model="factura.numero"  placeholder="No." required>
 				</div>
-				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.nombre.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado'">
+				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.nombre.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
 					<label for="" class="block">Nombre</label>
 					<input type="text" class="form-control" capitalize-first name="nombre"  ng-model="factura.nombre"  placeholder="Nombre" required>
 				</div>
-				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.direccion.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado'">
+				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.direccion.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
 					<label for="" class="block">Direccion</label>
 					<input type="text" class="form-control" name="direccion"  ng-model="factura.direccion"  placeholder="Direccion" required>
 				</div>
-				<button type="submit"  ng-show="factura.formaPago.nombre != 'contado'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.numero.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
-				<button type="submit" ng-show="factura.formaPago.nombre == 'contado'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.serie.$valid || !formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid || !formAgregarFactura.nit.$valid || !formAgregarFactura.numero.$valid ||  !formAgregarFactura.nombre.$valid  || !formAgregarFactura.direccion.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
+				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.formaPagoRef.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() != 'contado'">
+					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" for="" class="block">No. de autorización</label>
+					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'seguro'" for="" class="block">No. de poliza</label>
+					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'igss'" for="" class="block">No. de carnet del IGSS</label>
+					<input type="text" style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
+				</div>
+				<button type="submit"  ng-show="factura.formaPago.nombre.toLocaleLowerCase() != 'contado' && factura.formaPago.nombre.toLocaleLowerCase() != 'tarjeta de credito'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.formaPagoRef.$valid || !formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
+				<button type="submit" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.serie.$valid || !formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid || !formAgregarFactura.nit.$valid || !formAgregarFactura.numero.$valid ||  !formAgregarFactura.nombre.$valid  || !formAgregarFactura.direccion.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
     		</ng-form>
     		<hr>
     		<table class="table table-striped servicos-factura">
@@ -143,11 +149,11 @@
 				<tbody >
 					<tr id="{{item.idUsuarios}}" ng-repeat="item in serviciosFactura" > 
 						<td >{{$index+1}}</td>
-						<td>{{item.nombre}}</td> 
+						<td class="td-nombre">{{item.nombre}}</td> 
 						<td>{{item.precio |  currency:"Q"}}</td> 
 						<td>{{item.cantidad}}</td> 
 						
-						<td>
+						<td class="td-buttons" >
 							<button class="btn btn-success" ng-click="editar($index)">
 								Editar
 							</button>

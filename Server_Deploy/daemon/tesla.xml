@@ -1,1 +1,0 @@
-<service><id>tesla.exe</id><name>Tesla</name><description>server de tesla</description><executable>D:\Program Files\nodejs\node.exe</executable><arguments>--harmony "C:\Users\josec\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js" -f "C:\Version3\Server_Deploy\app.js" -l "Tesla" -g 0.25 -w 1 -r 3 -a n</arguments><logmode>rotate</logmode></service>

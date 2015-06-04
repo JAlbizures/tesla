@@ -6,6 +6,18 @@ table.table{
     box-sizing: border-box;
     height: 450px;
     width: auto;
+
+}
+.td-nombre2{
+    max-width: 300px;
+    overflow: hidden;    
+}
+.td-nombre{
+    max-width: 500px;
+    overflow: hidden;
+}
+.td-buttons{
+    min-width: 270px;
 }
 input{
     overflow: hidden;

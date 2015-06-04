@@ -15,7 +15,7 @@ app.get('/',function(req,res){
 });
 require('./routes')(app,io);
 var port = 8080
-server.listen(port,'0.0.0.0', function() {
+server.listen(port,'127.0.0.1', function() {
   console.log('%s listening at %s', '0.0.0.0', port);
 });
 

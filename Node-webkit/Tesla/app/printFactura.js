@@ -2,7 +2,7 @@ angular.module('app',[])
 	.controller('appCtrl',function ($scope,$timeout) {
 			//NumeroALetras
 		$scope.estado = true;
-		$scope.data = JSON.parse(sessionStorage.getItem('dataFactura'));
+		$scope.data = JSON.parse(localStorage.dataFactura);//JSON.parse(sessionStorage.getItem('dataFactura'));
 		console.log($scope.data);
 		$scope.data.montoLetras = NumeroALetras($scope.data.monto);
 		$scope.data.fecha = $scope.data.fecha.split('-');

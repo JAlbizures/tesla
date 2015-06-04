@@ -1,7 +1,0 @@
-2015-05-26 21:58:04 - Starting D:\Program Files\nodejs\node.exe --harmony "C:\Users\josec\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js" -f "C:\Version3\Server_Deploy\app.js" -l "Tesla" -g 0.25 -w 1 -r 3 -a n
-2015-05-26 21:58:05 - Started 5368
-2015-05-26 22:00:31 - Stopping tesla.exe
-2015-05-26 22:00:31 - ProcessKill 5368
-2015-05-26 22:00:31 - Finished tesla.exe
-2015-05-26 22:02:25 - Starting D:\Program Files\nodejs\node.exe --harmony "C:\Users\josec\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js" -f "C:\Version3\Server_Deploy\app.js" -l "Tesla" -g 0.25 -w 1 -r 3 -a n
-2015-05-26 22:02:26 - Started 2172

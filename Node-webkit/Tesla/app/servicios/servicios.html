@@ -33,7 +33,7 @@
 			</div>
 			<div class="form-group"  novalidate>
 				<label for="" class="block">Nombre</label>
-				<input type="text" class="form-control" capitalize-first name="nombre"  ng-model="servicio.nombre"  placeholder="Nombre" required>
+				<input type="text" class="form-control"  maxlength="100" capitalize-first name="nombre"  ng-model="servicio.nombre"  placeholder="Nombre" required>
 			</div>
 			<div class="form-group">
 				<label for="" class="block">Tecnico</label>
@@ -53,7 +53,7 @@
 			</div>
 			<div class="form-group"  novalidate>
 				<label for="" class="block">Nombre</label>
-				<input type="text" class="form-control" capitalize-first name="nombre" ng-model="updateServicio.nombre"  placeholder="Nombre" required>
+				<input type="text" class="form-control"  maxlength="100" capitalize-first name="nombre" ng-model="updateServicio.nombre"  placeholder="Nombre" required>
 			</div>
 			<div class="form-group">
 				<label for="" class="block">Tecnico</label>
@@ -82,10 +82,10 @@
 					<td >{{item.idServicio}}</td>
 					<td>{{item.numeroserial}}</td> 
 					<td>{{item.tipo  | titleCase}}</td> 
-					<td>{{item.nombre  | titleCase}}</td>
+					<td class="td-nombre">{{item.nombre  | titleCase}}</td>
 					<td> <i ng-class="{'glyphicon glyphicon-ok' : item.tecnico}"></i></td> 
 					<!-- <td>{{item.precio |  currency:"Q"}}</td>  -->
-					<td>
+					<td class="td-buttons">
 						<button class="btn btn-success" ng-click="editar(item)">
 							Editar
 						</button>

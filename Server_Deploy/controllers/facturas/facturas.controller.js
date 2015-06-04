@@ -6,15 +6,18 @@ exports.add = function (io) {
 		//console.log(req.body);
 		//query = "INSERT INTO factura (serie, numero, nombre,edad,telefono, nit,direccion,fecha,monto,paciente, formaPago) VALUES ( ?, ?, ? , ? ,?, ?, ?, ?, ?, ?, ?)";	
 		// serie, numero, nombre,edad,telefono, nit,direccion,monto,paciente, formaPago
-		var query = "SELECT  sp_ins_factura_servicio ( ?, ?, ? , ? ,?, ?, ?, ?, ?, ?) as insertId";	
-		if(req.body.formaPago.nombre.toLowerCase() != "contado"){
+		var query = "SELECT  sp_ins_factura_servicio ( ?, ?, ? , ? ,?, ?, ?, ?, ?, ? , ?, ?) as insertId";	
+		if(req.body.formaPago.nombre.toLowerCase() != "contado" || req.body.formaPago.nombre.toLowerCase() != "tarjeta de credito"){
 			req.body.nit = "";
 			req.body.direccion = "";
 			req.body.serie = "";
 			req.body.numero = 0;
 			req.body.nombre = "";
-		}
 
+		}else{
+			req.body.formaPagoRef = ""
+		}
+		console.log(req.body);
 		var data = [
 			req.body.serie,
 			parseInt(req.body.numero),
@@ -26,8 +29,8 @@ exports.add = function (io) {
 			parseFloat(req.body.monto),
 			req.body.paciente,
 			parseInt(req.body.formaPago.idFormaPago),
-			req.body.fecha
-
+			req.body.usuario,
+			req.body.formaPagoRef
 		];
 		
 		//console.log(req.body);
@@ -100,10 +103,10 @@ function recursiva (query,data,index,callback,io,body) {
 }
 
 exports.correlactivo = function (req,res) {
-	var query = "SELECT numero,serie FROM factura";
+	var query = "CALL sp_sel_resolucion_fac_serie_numero()";//"SELECT numero,serie FROM factura";
 	connect.query(query,undefined, function (row) {
-		//console.log(row);
-		res.json(row);
+		console.log(row);
+		res.json(row[0]);
 	})
 
 }
