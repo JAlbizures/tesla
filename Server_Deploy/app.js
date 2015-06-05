@@ -22,12 +22,12 @@ server.listen(port,'127.0.0.1', function() {
 io.on('connection', function (socket) {
 	
 	require('./controllers/facturas/facturas.controller').detalleServicio(function (rows) {
-		console.log('connection',rows);
+		console.log('connection io');
 		socket.emit('servicios',rows);	
 	});
 	socket.on('getServicios',function (data) {
 		require('./controllers/facturas/facturas.controller').detalleServicio(function (rows) {
-			console.log('getServicios',rows);
+			console.log('getServicios io');
 			socket.emit('servicios',rows);	
 		});
 	})		

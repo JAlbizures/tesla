@@ -7,17 +7,20 @@ exports.add = function (io) {
 		//query = "INSERT INTO factura (serie, numero, nombre,edad,telefono, nit,direccion,fecha,monto,paciente, formaPago) VALUES ( ?, ?, ? , ? ,?, ?, ?, ?, ?, ?, ?)";	
 		// serie, numero, nombre,edad,telefono, nit,direccion,monto,paciente, formaPago
 		var query = "SELECT  sp_ins_factura_servicio ( ?, ?, ? , ? ,?, ?, ?, ?, ?, ? , ?, ?) as insertId";	
-		if(req.body.formaPago.nombre.toLowerCase() != "contado" || req.body.formaPago.nombre.toLowerCase() != "tarjeta de credito"){
+		if(req.body.formaPago.nombre.toLowerCase() != "contado" && req.body.formaPago.nombre.toLowerCase() != "tarjeta de credito"){	
 			req.body.nit = "";
 			req.body.direccion = "";
 			req.body.serie = "";
 			req.body.numero = 0;
 			req.body.nombre = "";
 
-		}else{
-			req.body.formaPagoRef = ""
 		}
-		console.log(req.body);
+		if(req.body.formaPago.nombre.toLowerCase() != "contado" && req.body.formaPago.nombre.toLowerCase() != "tarjeta de credito"){
+			query = "SELECT  sp_ins_factura_servicio2 ( ?, ?, ? , ? ,?, ?, ?, ?, ?, ? , ?, ?) as insertId";
+		}
+		if(req.body.formaPago.nombre.toLowerCase() == "contado"){
+			req.body.formaPagoRef = "";	
+		}
 		var data = [
 			req.body.serie,
 			parseInt(req.body.numero),
@@ -32,10 +35,7 @@ exports.add = function (io) {
 			req.body.usuario,
 			req.body.formaPagoRef
 		];
-		
-		//console.log(req.body);
-		
-		console.log(data);
+		console.log('cual',query,data);
 		connect.query(query,data,function (row) {
 			
 			//console.log(row); idfactura, servicio,
@@ -43,7 +43,6 @@ exports.add = function (io) {
 			//query2 = "INSERT INTO facturadetalle (idFactura, idServicio, cantidad, precio, nombre, tec) VALUES (?, ?, ?, ?, ?)";
 			var  detalle = req.body.faturaDetalle;
 			var data = [];
-			console.log(detalle);
 			for(var index  in detalle){
 				detalle[index].tecnico = (detalle[index].tecnico) ? 1 : 0;
 				element = [
@@ -105,7 +104,6 @@ function recursiva (query,data,index,callback,io,body) {
 exports.correlactivo = function (req,res) {
 	var query = "CALL sp_sel_resolucion_fac_serie_numero()";//"SELECT numero,serie FROM factura";
 	connect.query(query,undefined, function (row) {
-		console.log(row);
 		res.json(row[0]);
 	})
 

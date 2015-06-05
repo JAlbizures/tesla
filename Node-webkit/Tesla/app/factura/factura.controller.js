@@ -229,6 +229,17 @@ angular.module('angularApp')
 	  				$scope.factura = {};
 	  				$scope.factura.fecha = dateNow();
 	  				$scope.factura.formaPago = $scope.formaPago[0];
+	  				$http.get(Config.path+'/facturas/correlativo')
+						.success(function (data) {
+							console.log(data);
+							$scope.factura.numero = data[0].numero_actual;
+							$scope.factura.serie = data[0].serie;
+							//$scope.correlativo  = data;
+						})
+						.error(function (data) {
+							console.log(data);
+							alert(data);
+						});
 	  			})
 	  			.error(function  (data) {
 	  				console.log(data);
