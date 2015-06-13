@@ -1,0 +1,44 @@
+
+<div>
+	<div>
+		<div class="col-lg-12">
+			<form class="form-inline" novalidate>
+				<div class="form-group">
+					<label for="" class=" text-center">De</label>
+					<input type="date" class="form-control" name="fecha1"  ng-model="fecha1"  required>
+				</div>
+				<div class="form-group">
+					<label for="" class=" text-center">a</label>
+					<input type="date" class="form-control" name="fecha1"  ng-model="fecha2" required>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-default" ng-click="filtro = !filtro" ng-class="{active : filtro}"><span class="glyphicon glyphicon-filter"></span></button>
+				</div>
+				<div class="form-group">
+					<p ng-show="(fecha1 == null || fecha2 == null) && filtro" class="text-danger">Agrege un rango de fechas</p>
+				</div>
+			</form>	
+			<br>
+			<table class="table table-striped">
+				<thead>
+					<th>Serie</th>
+					<th>No.</th>
+					<th>Nombre</th>
+					<th>Fecha</th>
+					<th>Estado</th>
+
+				</thead>
+				<tbody>
+					<tr ng-show="filtrar(item.fecha)" id="{{item.idFactura}}" ng-repeat="item in facturas">
+						<td>{{item.serie}}</td>
+						<td>{{item.numero}}</td>
+						<td>{{item.nombre}}</td>
+						<td>{{item.fecha  | date:'dd/MM/yyyy'}}</td>
+						<td><span ng-if="item.estado == 2">Anulada</span><span ng-if="item.estado == 1">Activa</span></td>
+						<td ng-if="item.estado == 1"><button ng-click="anular(item.idFactura)"  class="btn btn-danger">Anular</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

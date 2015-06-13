@@ -138,11 +138,23 @@ exports.detalleServicio = function (callback) {
 			if(callback) callback(row);
 		});
 		
-
-
 	
 }
-
+exports.anular = function  (req,res,next) {
+	var query = "CALL sp_upd_factura_anula(? , ? )";
+	connect.query(query,[req.body.idFactura,req.body.idUsuario],function  (row) {
+		console.log(row)
+		//res.json(row);
+		next();
+	})
+}
+exports.facturas = function (req,res) {
+	var query = "SELECT * FROM factura WHERE serie <> '' AND  numero <> 0";
+	connect.query(query,undefined,function  (row) {
+		console.log(row)
+		res.json(row);
+	})
+}
 exports.cambiarEstado =function (io) {
 	return function (req,res) {
 		var  query ="UPDATE facturadetalle SET estado = true WHERE idFacturaDetalle=? ";

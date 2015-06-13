@@ -12,6 +12,8 @@ module.exports = function (io) {
 	router.post('/crear', controller.add(io),controller.correlactivo);
 	router.get('/correlativo/', controller.correlactivo);
 	router.put('/cambiarEstado/',controller.cambiarEstado(io));
+	router.put('/anular/',controller.anular,controller.facturas);
+	router.get('/', controller.facturas);
 	return router;
 } 
 
