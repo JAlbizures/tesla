@@ -219,7 +219,7 @@ angular.module('angularApp')
 			 					"width" : 800,
 			 					"min_width" : 800,
 			 					"max_width" : 800,
-			 					"toolbar": true,
+			 					"toolbar": false,
 	  							"frame": true
 			 				});
 			 				localStorage.dataFactura = JSON.stringify(factura);

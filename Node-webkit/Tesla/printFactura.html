@@ -6,9 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<style>
 		body{
-			font-size: 8px;
+			font-size: 10px;
 			letter-spacing: 5px;
 			line-height: 16px;
+			font-family: "Times New Roman", Times, serif;
 		}
 		p {
 			position: absolute;
@@ -80,7 +81,71 @@
 	<p style="top: 115px; left: 450px;">{{data.monto |  currency:"Q"}}</p>
 	<p style="top: 115px; left: 50px;">{{data.montoLetras}}</p>
 
+	<script>
+		Number.prototype.formatMoney = function(c, d, t){
+		var n = this, 
+			c = isNaN(c = Math.abs(c)) ? 2 : c, 
+			d = d == undefined ? "." : d, 
+			t = t == undefined ? "," : t, 
+			s = n < 0 ? "-" : "", 
+			i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+			j = (j = i.length) > 3 ? j % 3 : 0;
+		   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+		 };
+		function chr(codePt) {
+		  //  discuss at: http://phpjs.org/functions/chr/
+		  // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		  // improved by: Brett Zamir (http://brett-zamir.me)
+		  //   example 1: chr(75) === 'K';
+		  //   example 1: chr(65536) === '\uD800\uDC00';
+		  //   returns 1: true
+		  //   returns 1: true
 
+		  if (codePt > 0xFFFF) { // Create a four-byte string (length 2) since this code point is high
+			//   enough for the UTF-16 encoding (JavaScript internal use), to
+			//   require representation with two surrogates (reserved non-characters
+			//   used for building other characters; the first is "high" and the next "low")
+			codePt -= 0x10000;
+			return String.fromCharCode(0xD800 + (codePt >> 10), 0xDC00 + (codePt & 0x3FF));
+		  }
+		  return String.fromCharCode(codePt);
+		}
+		var STR_PAD_LEFT = 1;
+		var STR_PAD_RIGHT = 2;
+		var STR_PAD_BOTH = 3;
+
+		function pad(str, len, pad, dir) {
+
+			if (typeof(len) == "undefined") { var len = 0; }
+			if (typeof(pad) == "undefined") { var pad = ' '; }
+			if (typeof(dir) == "undefined") { var dir = STR_PAD_RIGHT; }
+
+			if (len + 1 >= str.length) {
+
+				switch (dir){
+
+					case STR_PAD_LEFT:
+						str = Array(len + 1 - str.length).join(pad) + str;
+					break;
+
+					case STR_PAD_BOTH:
+						var right = Math.ceil((padlen = len - str.length) / 2);
+						var left = padlen - right;
+						str = Array(left+1).join(pad) + str + Array(right+1).join(pad);
+					break;
+
+					default:
+						str = str + Array(len + 1 - str.length).join(pad);
+					break;
+
+				} // switch
+
+			}
+
+			return str;
+
+		}
+	</script>
 	<script src="app/numerToWords.js"></script>
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/angular/angular.js"></script>

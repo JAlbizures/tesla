@@ -1,6 +1,5 @@
 angular.module('angularApp')
  	.controller('ModalServiciosCtrl',function ($scope, $modalInstance, servicios,precios,formaPago) {
- 		console.log('servicios',servicios);
  		$scope.precios = precios;
  		$scope.formaPago = formaPago;
  		$scope.servicios = servicios;

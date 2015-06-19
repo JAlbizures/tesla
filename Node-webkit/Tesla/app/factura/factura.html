@@ -45,27 +45,28 @@
 					<label for="" class="block">Telefono</label>
 					<input type="number" min="10000000" max="99999999" name="telefono" class="form-control" ng-model="factura.telefono" placeholder="Telefono" required>
 				</div>
-				<div class="form-group" >
+				<div class="form-group" ng-show="false">
 					<label for="" class="block">Monto</label>
 					<input type="number" ng-disabled="true"class="form-control" name="monto" style="width:100px" ng-init="factura.monto = null"  ng-model="factura.monto"  placeholder="Monto" required>
 					
+				</div>
+				<div class="form-group">
+					<label for="" class="block">&nbsp;&nbsp;</label>
+					<button ng-show="!editando" ng-click='showServicios()' class="btn btn-primary bottom">Lista de servicios</button>
 				</div>
 				<div  class="form-group">
 					<input class="form-control" style="visibility:hidden;" type="text">	
 					<p class="text-danger" style="vertical-align: bottom;" ng-show="numeroValido"> Serie/numero invalido</p>
 					<p class="text-danger" style="vertical-align: bottom;" ng-hide="serviciosFactura.length == 0 || (formAgregarFactura.paciente.$valid && formAgregarFactura.edad.$valid && formAgregarFactura.telefono.$valid && formAgregarFactura.formaPago.$valid && (formAgregarFactura.nit.$valid || factura.formaPago != 'contado') && (formAgregarFactura.numero.$valid || factura.formaPago != 'contado') && (formAgregarFactura.nombre.$valid || factura.formaPago != 'contado')  && (formAgregarFactura.direccion.$valid || factura.formaPago != 'contado') )"> Tiene que llenar todos lo campos correctamente</p>
 				</div>
-
-				<br>
-				<br>
-				<ng-form ng-show="!editando" class="form-inline inline-block"   name="formAgregarServicio">
+				<ng-form ng-show="false" class="form-inline inline-block"   name="formAgregarServicio">
 					<div class="form-group"  novalidate>
 						<label for="" class="block">ID</label>
 						<input type="number" min="0" class="form-control" name="idServicio" ng-model="newServicio.idServicio"  placeholder="ID" required>
 					</div>
 					<div class="form-group"  novalidate>
 						<label for="" class="block">Nombre</label>
-						<input type="text" class="form-control" capitalize-first ng-disabled="!cambioNombre" name="nombre" ng-model="newServicio.nombre"  placeholder="Nombre" required>
+						<input type="text" class="form-control" ng-disabled="!cambioNombre" name="nombre" ng-model="newServicio.nombre"  placeholder="Nombre" required>
 					</div>
 					<div class="form-group">
 						<label for="" class="block">Precio</label>
@@ -79,7 +80,7 @@
 					<button type="submit" class="btn btn-success bottom" ng-click="agregar(newServicio)"  ng-disabled="!formAgregarServicio.$valid">Agregar Servicio</button>	
 					<button ng-show="!editando" ng-click='showServicios()' class="btn btn-primary bottom">Lista de servicios</button>
 				</ng-form>
-				<ng-form  ng-show="editando" class="form-inline inline-block"  name="formEditarServicio">
+				<ng-form  ng-show="false" class="form-inline inline-block"  name="formEditarServicio">
 					<div class="form-group"  novalidate>
 						<label for="" class="block">ID</label>
 						<input type="number" disabled="false" class="form-control" name="idServicio" ng-model="editServicio.idServicio"  placeholder="ID" required>
@@ -112,27 +113,29 @@
 					<label for="" class="block">NIT</label>
 					<input type="text" style="width : 150px" class="form-control" name="nit"  ng-model="factura.nit"  placeholder="NIT" required>
 				</div>
-				<div class="form-group"  ng-class="{'has-error' : !formAgregarFactura.serie.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
+				<div class="form-group"  ng-class="{'has-error' : !formAgregarFactura.serie.$valid && serviciosFactura.length != 0}" ng-show="false">
 					<label for="" class="block" >Serie</label>
 					<input type="text" ng-disabled="facturacionAuto" style="width : 100px" class="form-control" name="serie"  ng-model="factura.serie"  placeholder="Serie" required>
 				</div>
-				<div class="form-group"  ng-class="{'has-error' : !formAgregarFactura.numero.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
+				<div class="form-group"  ng-class="{'has-error' : !formAgregarFactura.numero.$valid && serviciosFactura.length != 0}" ng-show="false">
 					<label for="" class="block" >No.</label>
 					<input type="number" ng-disabled="facturacionAuto" style="width : 100px" class="form-control" name="numero"  ng-model="factura.numero"  placeholder="No." required>
 				</div>
 				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.nombre.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
-					<label for="" class="block">Nombre</label>
-					<input type="text" class="form-control" capitalize-first name="nombre"  ng-model="factura.nombre"  placeholder="Nombre" required>
+					<label for="" class="block">Nombre a facturar</label>
+					<input type="text" class="form-control" name="nombre"  ng-model="factura.nombre"  placeholder="Nombre" required>
 				</div>
 				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.direccion.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'">
-					<label for="" class="block">Direccion</label>
+					<label for="" class="block">Direccion de facturacion</label>
 					<input type="text" class="form-control" name="direccion"  ng-model="factura.direccion"  placeholder="Direccion" required>
 				</div>
 				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.formaPagoRef.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() != 'contado'">
 					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" for="" class="block">No. de autorización</label>
 					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'seguro'" for="" class="block">No. de poliza</label>
 					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'igss'" for="" class="block">No. de carnet del IGSS</label>
-					<input type="text" style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
+					<input ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" placeholder="No. de autorización" type="text" style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
+					<input ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'seguro'" type="text" placeholder="No. de poliza"  style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
+					<input ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'igss'" type="text" placeholder="No. de carnet del IGSS" style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
 				</div>
 				<button type="submit"  ng-show="factura.formaPago.nombre.toLocaleLowerCase() != 'contado' && factura.formaPago.nombre.toLocaleLowerCase() != 'tarjeta de credito'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.formaPagoRef.$valid || !formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
 				<button type="submit" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.serie.$valid || !formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid || !formAgregarFactura.nit.$valid || !formAgregarFactura.numero.$valid ||  !formAgregarFactura.nombre.$valid  || !formAgregarFactura.direccion.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
@@ -154,9 +157,9 @@
 						<td>{{item.cantidad}}</td> 
 						
 						<td class="td-buttons" >
-							<button class="btn btn-success" ng-click="editar($index)">
+							<!-- <button class="btn btn-success" ng-click="editar($index)">
 								Editar
-							</button>
+							</button> -->
 							<button class="btn btn-danger" ng-click="eliminar($index)">
 								Eliminar
 							</button>
