@@ -19,8 +19,7 @@
 		<div style="text-align:center;"><p>-Reporte de {{reporte.fecha1}} a {{reporte.fecha2}} de {{reporte.tipo}}-</p></div>
 		<table class="table table-striped servicos-factura">
 			<thead>
-				<th>Serie</th>
-				<th>No.</th>
+				<th>Factura</th>
 				<th>Fecha</th>
 				<th>Nombre</th>
 				<th>Paciente</th>
@@ -31,8 +30,7 @@
 			</thead>
 			<tbody >
 				<tr ng-repeat="item in data">
-					<td>{{item.serie}}</td>
-					<td>{{item.numero}}</td>
+					<td>{{item.serie}}-{{item.numero}}</td>
 					<td>{{item.fecha | date:'dd/MM/yyyy'}}</td>
 					<td>{{item.nombre}}</td>
 					<td>{{item.paciente}}</td>
