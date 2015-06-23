@@ -60,8 +60,8 @@ exports.generarFacturasPDF = function (req,res) {
 	console.log('wait...');
 	require("jsreport").render({
 		template: {
-			content : style+'<body><table class="table table-striped servicos-factura"> <thead> <th>Serie</th><th>No.</th><th>Fecha</th><th>Nombre</th><th>Paciente</th><th>Direccion</th><th>Servicio</th><th>Precio</th><th>Subtotal</th> </thead> <tbody>{{for facturas}}<tr> <td>{{:serie}}</td><td>{{:numero}}</td><td>{{:fecha}}</td><td>{{:nombre}}</td><td>{{:paciente}}</td><td>{{:direccion}}</td><td>{{:nombreServico}}</td><td>{{:precio}}</td><td>{{:monto}}</td></tr>{{/for}}</tbody></table></body>',
-			helpers : 'function dateNow(){var date=new Date(); return date.getDate() + "/" +(date.getMonth() + 1) + "/" + date.getFullYear();}',
+			content : style+'<body><table class="table table-striped servicos-factura"> <thead> <th>Factura</th><th>Fecha</th><th>Nombre</th><th>Paciente</th><th>Direccion</th><th>Servicio</th><th>Precio</th><th>Subtotal</th> </thead> <tbody>{{for facturas}}<tr> <td>{{:serie}}-{{:numero}}</td><td>{{:~dateNow(fecha)}}</td><td>{{:nombre}}</td><td>{{:paciente}}</td><td>{{:direccion}}</td><td>{{:nombreServico}}</td><td>Q{{:~money(precio)}}</td><td>Q{{:~money(monto)}}</td></tr>{{/for}}</tbody></table></body>',
+			helpers : 'function dateNow(){var date=new Date(); return date.getDate() + "/" +(date.getMonth() + 1) + "/" + date.getFullYear();},function money(numero){return numero.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');}',
 			engine: "jsrender",
 			phantom : {
 				footer : "<div style='text-align:center'>{#pageNum}/{#numPages}</div>",
