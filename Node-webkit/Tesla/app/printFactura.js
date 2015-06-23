@@ -34,7 +34,7 @@ angular.module('app',[])
 				$scope.data.montoLetras.substring(0,79);
 			}
 			data +=" "+ chr(13)+chr(10);
-			data +="                                     *" + $scope.data.montoLetras +'*'+ chr(13) + chr(10);
+			data +="                    *" + $scope.data.montoLetras +'*'+ chr(13) + chr(10);
 			data +="    "+$scope.data.serie + " " + $scope.data.numero;
 			var fs = require("fs");
 			fs.writeFile('c:/sistesla/impresion.txt',data);
