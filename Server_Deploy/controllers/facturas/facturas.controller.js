@@ -72,7 +72,7 @@ exports.add = function (io) {
 function recursiva (query,data,index,callback,io,body) {
 
 	connect.query(query,data[index],function (rows) {
-//console.log(data[index][1]);
+		//console.log(data[index][1]);
 	
 		//console.log(body.faturaDetalle[index]);
 		//console.log(servicioTecnico[i]);
@@ -106,9 +106,7 @@ exports.correlactivo = function (req,res) {
 	connect.query(query,undefined, function (row) {
 		res.json(row[0]);
 	})
-
 }
-
 exports.detalleServicio = function (callback) {
 	
 		
@@ -136,9 +134,7 @@ exports.detalleServicio = function (callback) {
 		// recursiva(1,length);
 		connect.query(query,undefined,function (row) {
 			if(callback) callback(row);
-		});
-		
-	
+		});	
 }
 exports.anular = function  (req,res,next) {
 	var query = "CALL sp_upd_factura_anula(? , ? )";
@@ -165,5 +161,54 @@ exports.cambiarEstado =function (io) {
 				res.json({});	
 			});
 		});
+	}
+}
+exports.facturasActivas = function  (req,res) {
+	var query = "select f1.idFactura, f1.fecha, f1.serie,f1.refFormPago, f1.numero, f1.nombre, f1.paciente, f1.monto, f1.estado, fp.idFormaPago,fp.nombre as formaPago from factura f1, formaPago fp where fp.idFormaPago = f1.formaPago and f1.estado = 1 order by fecha";
+	connect.query(query,undefined,function (row) {
+		res.json(row);
+	});
+}
+exports.cierre = function  (req,res) {
+	//console.log(req.body);
+	var query = "select sp_ins_cierre( ? , ? , ? , ? , ? , ? , ? , ?) as insertId"
+	data = [
+		req.body.fecha_i,
+		req.body.fecha_f,
+		Number(req.body.montoEfectivo),
+		Number(req.body.montoDeposito),
+		Number(req.body.montoFacturado),
+		Number(req.body.numero_ini),
+		Number(req.body.numero_fin),
+		Number(req.body.idUsuario)
+	];
+	console.log();
+	connect.query(query, data,function  (row) {
+		data = [];
+		console.log(row[0].insertId);
+		query = "call sp_ins_cierre_detalle( ? , ? , ? , ?)"
+		for (var i = req.body.detalle.length - 1; i >= 0; i--) {
+			data.push([req.body.detalle[i].idFormaPago,req.body.detalle[i].monto,req.body.detalle[i].refFormPago,row[0].insertId	,req.body.detalle[i].idFactura]);
+		};
+		recursiva2(query,data,function () {
+			console.log('termino');
+			res.json([]);		
+		});
+	});
+	
+}
+
+
+function recursiva2 (query,data,callback) {
+	if(data.length !== 0){
+		connect.query(query,data[0],function  (row) {
+			var auxQuery = 'UPDATE factura SET estado = 3 WHERE idFactura = ?;'
+			connect.query(auxQuery,data[0][data[0].length-1],function  (row) {
+				data.splice(0,1);
+				recursiva2(query,data,callback);	
+			});
+		});
+	}else {
+		callback();
 	}
 }

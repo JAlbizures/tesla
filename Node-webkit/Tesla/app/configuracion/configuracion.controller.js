@@ -4,12 +4,16 @@ angular.module('angularApp')
  		Auth.currentUser();
  		$scope.configuracion = {};
  		console.log(Config.list);
- 		for(var index in Config.list){
- 			$scope.configuracion[Config.list[index].nombre] = {};
- 			$scope.configuracion[Config.list[index].nombre].dato = Config.list[index].dato;
- 			$scope.configuracion[Config.list[index].nombre].titulo =  Config.list[index].titulo;
- 			$scope.configuracion[Config.list[index].nombre].idConfig =  Config.list[index].idConfig;
+ 		
+ 		$scope.configuracionOrder = function  () {
+	 		for(var index in Config.list){
+	 			$scope.configuracion[Config.list[index].nombre] = {};
+	 			$scope.configuracion[Config.list[index].nombre].dato = Config.list[index].dato;
+	 			$scope.configuracion[Config.list[index].nombre].titulo =  Config.list[index].titulo;
+	 			$scope.configuracion[Config.list[index].nombre].idConfig =  Config.list[index].idConfig;
+	 		}	
  		}
+ 		$scope.configuracionOrder();
  		console.log(Config.list)
 
  		$scope.config = Config.list;
@@ -40,7 +44,8 @@ angular.module('angularApp')
 						}
 						$rootScope.config.push(temp);
 					}
-					Config.update($rootScope.config);	
+					Config.update($rootScope.config);
+					$scope.configuracionOrder();	
 				})
  				.error(function (data) {
  					alert(data);

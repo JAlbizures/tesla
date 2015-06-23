@@ -60,12 +60,13 @@ angular.module('angularApp', [
       return input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     	};
   	})
-  	.factory('Config', function ($rootScope) {	
+  .factory('Config', function ($rootScope) {	
   	   var list = $rootScope.config;
   		return {
         'list' :list,
         'path' : $rootScope.path,
         'update' : function  (configuracion) {
+          console.log('cambio',list);
           list = configuracion;
         }
       };

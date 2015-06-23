@@ -88,20 +88,15 @@ angular.module('angularApp')
 		});
 		$scope.$watch('factura.formaPago',function (newV, oldV) {
 			if(newV !== oldV){
-				if($scope.newServicio.precio != null || $scope.newServicio.precio != null){
+				if($scope.newServicio.precio != null){
 					$scope.newServicio.precio = parseFloat($scope.precios[$scope.newServicio.idServicio][$scope.factura.formaPago.idFormaPago]);
 				}
 				for (var i = $scope.serviciosFactura.length - 1; i >= 0; i--) {
 					$scope.serviciosFactura[i].precio =  parseFloat($scope.precios[$scope.serviciosFactura[i].idServicio][$scope.factura.formaPago.idFormaPago]);
-					console.log(isNaN($scope.serviciosFactura[i].precio));
-					console.log($scope.serviciosFactura[i].precio);
-					if(isNaN($scope.serviciosFactura[i].precio)) {
-//						alert();
+					if(isNaN($scope.serviciosFactura[i].precio)){
 						$scope.serviciosFactura.splice(i,1);
 					}
-				
 				};
-				//$scope.$apply();
 				$scope.factura.monto = 0;
 				for(var index in $scope.serviciosFactura){
 					console.log($scope.factura.monto);	

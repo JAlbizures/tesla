@@ -20,6 +20,11 @@ angular.module('angularApp')
 	  		});
 	  	$scope.ok = function () {
 			if($scope.cambio && $scope.tempPrecios != $scope.precios){
+				for (var i = $scope.precios.length - 1; i >= 0; i--) {
+					if(!$scope.precios[i].precio || $scope.precios[i].precio == '' || $scope.precios[i].precio == null){
+						$scope.precios[i].precio = 0;
+					}	
+				}
 				 $http.put(Config.path+'/servicios/precios',$scope.precios)
 			        .success(function (data) {
 			          console.log(data);
@@ -33,7 +38,8 @@ angular.module('angularApp')
 			           $scope.estado = false;
 			        });
 			}else{
-				alert('no guardar');
+				 $modalInstance.close();
+				//alert('no guardo');
 			}
 			//$modalInstance.close();
 		};

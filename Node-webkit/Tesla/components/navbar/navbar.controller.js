@@ -14,10 +14,10 @@ angular.module('angularApp')
             'name': 'facturas',
             'path' : '/facturas'
           });
-          // $scope.menu.push({
-          //   'name': 'cierre',
-          //   'path' : '/cierre'
-          // });
+          $scope.menu.push({
+            'name': 'cierre',
+            'path' : '/cierre'
+          });
         }
         if(currentUser.rol == 'tecnico' || currentUser.rol == 'root' || currentUser.rol == 'admin'){
            $scope.menu.push({
