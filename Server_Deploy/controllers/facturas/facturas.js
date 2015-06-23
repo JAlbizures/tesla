@@ -14,6 +14,8 @@ module.exports = function (io) {
 	router.put('/cambiarEstado/',controller.cambiarEstado(io));
 	router.put('/anular/',controller.anular,controller.facturas);
 	router.get('/', controller.facturas);
+	router.get('/activas', controller.facturasActivas);
+	router.post('/cierre', controller.cierre);
 	return router;
 } 
 
