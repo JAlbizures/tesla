@@ -61,7 +61,7 @@ exports.generarFacturasPDF = function (req,res) {
 	require("jsreport").render({
 		template: {
 			content : style+'<body><table class="table table-striped servicos-factura"> <thead> <th>Factura</th><th>Fecha</th><th>Nombre</th><th>Paciente</th><th>Direccion</th><th>Servicio</th><th>Precio</th><th>Subtotal</th> </thead> <tbody>{{for facturas}}<tr> <td>{{:serie}}-{{:numero}}</td><td>{{:~dateNow(fecha)}}</td><td>{{:nombre}}</td><td>{{:paciente}}</td><td>{{:direccion}}</td><td>{{:nombreServico}}</td><td>Q{{:~anulado(estado,monto)}}</td><td>Q{{:~anulado(estado,monto)}}</td></tr>{{/for}}</tbody></table></body>',
-			helpers : 'function dateNow(){var date=new Date(); return date.getDate() + "/" +(date.getMonth() + 1) + "/" + date.getFullYear();};function money(numero){return numero.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");};function anulado(estado,numero){ if(estado.toLowerCase() == "anulado"){return "Anulado"}else{return money(numero)}}',
+			helpers : 'function dateNow(){var date=new Date(); return date.getDate() + "/" +(date.getMonth() + 1) + "/" + date.getFullYear();};function money(numero){return numero.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");};function anulado(estado,numero){ if(estado.toLowerCase() == "anulada"){return "Anulada"}else{return money(numero)}}',
 			engine: "jsrender",
 			phantom : {
 				footer : "<div style='text-align:center'>{#pageNum}/{#numPages}</div>",
