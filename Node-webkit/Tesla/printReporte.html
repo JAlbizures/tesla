@@ -25,6 +25,7 @@
 				<th>Paciente</th>
 				<th>Direccion</th>
 				<th>Servicio</th>
+				<th>Forma de Pago</th>
 				<th>Precio</th>
 				<th>Subtotal</th>
 			</thead>
@@ -36,8 +37,9 @@
 					<td>{{item.paciente}}</td>
 					<td>{{item.direccion}}</td>
 					<td>{{item.nombreServicio}}</td>
-					<td>{{item.precio |  currency:"Q"}}</td>
-					<td>{{item.precio*item.cantidad | currency:"Q"}}</td>
+					<td>{{item.nFormaPago}}</td>
+					<td><span ng-if="item.estado.toLowerCase() == 'anulada'">Anulada</span><span ng-if="item.estado.toLowerCase() !== 'anulada'">{{item.precio |  currency:"Q"}}</span></td>
+					<td><span ng-if="item.estado.toLowerCase() == 'anulada'">Anulada</span><span ng-if="item.estado.toLowerCase() !== 'anulada'">{{item.precio*item.cantidad | currency:"Q"}}</span></td>
 				</tr>
 			</tbody>
 		</table>

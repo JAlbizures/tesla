@@ -72,7 +72,7 @@ exports.add = function (io) {
 function recursiva (query,data,index,callback,io,body) {
 
 	connect.query(query,data[index],function (rows) {
-		//console.log(data[index][1]);
+		console.log(data[index]);
 	
 		//console.log(body.faturaDetalle[index]);
 		//console.log(servicioTecnico[i]);
