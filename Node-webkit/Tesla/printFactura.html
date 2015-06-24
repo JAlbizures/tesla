@@ -68,8 +68,8 @@
 	<div style="position: absolute;left: 20px; top: {{55+(10 * $index)}}px;" ng-repeat="item in data.faturaDetalle">
 		<div class="nombre">{{item.nombre}} &nbsp;&nbsp; </div>
 		<div class="cantidad">cantidad:{{item.cantidad}} &nbsp;&nbsp; </div>
-		<div class="preciou"><span ng-if="item.estado.toLowerCase() == 'anulado'">Anulado</span><span ng-if="item.estado.toLowerCase() !== 'anulado'">Precio Uni. {{item.precio |  currency:"Q"}}</span></div>
-		<div class="preciototal"><span ng-if="item.estado.toLowerCase() == 'anulado'">Anulado</span><span ng-if="item.estado.toLowerCase() !== 'anulado'">{{item.precio*item.cantidad | currency:"Q"}}</span></div>
+		<div class="preciou"><span ng-if="item.estado.toLowerCase() == 'anulada'">Anulada</span><span ng-if="item.estado.toLowerCase() !== 'anulada'">Precio Uni. {{item.precio |  currency:"Q"}}</span></div>
+		<div class="preciototal"><span ng-if="item.estado.toLowerCase() == 'anulada'">Anulada</span><span ng-if="item.estado.toLowerCase() !== 'anulada'">{{item.precio*item.cantidad | currency:"Q"}}</span></div>
 	</div>
 	<!-- <p style="left:450px; top: {{80+(15 * $index)}}px;" ng-repeat="item in data.faturaDetalle"></p> -->
 	
