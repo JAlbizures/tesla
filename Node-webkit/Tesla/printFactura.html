@@ -6,10 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<style>
 		body{
-			font-size: 10px;
-			letter-spacing: 5px;
-			line-height: 16px;
-			font-family: "Times New Roman", Times, serif;
+			font-size: 15px;
+			/*letter-spacing: 5px;*/
+			/*line-height: 16px;*/
+			/*font-family: "Times New Roman", Times, serif;*/
 		}
 		p {
 			position: absolute;
@@ -49,7 +49,7 @@
 <body>
 	<button ng-click="imprimir()" ng-show="estado" class="pull-right btn btn-default">Imprimir</button>
 	<p style="top: 25px;  left: 50px;">Nombre: {{data.nombre}}</p>
-	<p style="top: 35px;  left: 50px;">Direccion: {{data.direccion}}</p>
+	<p style="top: 45px;  left: 50px;">Direccion: {{data.direccion}}</p>
 <!-- 	<p style="top: 290px; left: 380px">Serie "{{data.serie}}"</p>
 	<p style="top: 290px; left: 470px">No. {{data.numero}}</p> -->
 <!-- 	<div class="tabla">
@@ -65,7 +65,7 @@
 			</tbody>
 		</table>	
 	</div> -->
-	<div style="position: absolute;left: 20px; top: {{55+(10 * $index)}}px;" ng-repeat="item in data.faturaDetalle">
+	<div style="position: absolute;left: 20px; top: {{75+(10 * $index)}}px;" ng-repeat="item in data.faturaDetalle">
 		<div class="nombre">{{item.nombre}} &nbsp;&nbsp; </div>
 		<div class="cantidad">cantidad:{{item.cantidad}} &nbsp;&nbsp; </div>
 		<div class="preciou">Precio Uni. {{item.precio |  currency:"Q"}}</div>
@@ -73,13 +73,13 @@
 	</div>
 	<!-- <p style="left:450px; top: {{80+(15 * $index)}}px;" ng-repeat="item in data.faturaDetalle"></p> -->
 	
-	<p style="top: 25px;left: 325px;">fecha: {{data.fecha[2]}}/{{data.fecha[1]}}/{{data.fecha[0]}}</p>
+	<p style="top: 25px;left: 400px;">fecha: {{data.fecha[2]}}/{{data.fecha[1]}}/{{data.fecha[0]}}</p>
 
 	
-	<p style="top: 35px; left: 400px;">Nit :{{data.nit}}</p>
+	<p style="top: 45px; left: 400px;">Nit :{{data.nit}}</p>
 
-	<p style="top: 115px; left: 450px;">{{data.monto |  currency:"Q"}}</p>
-	<p style="top: 115px; left: 50px;">{{data.montoLetras}}</p>
+	<p style="top: 170px; left: 450px;">{{data.monto |  currency:"Q"}}</p>
+	<p style="top: 170px; left: 50px;">{{data.montoLetras}}</p>
 
 	<script>
 		Number.prototype.formatMoney = function(c, d, t){

@@ -206,58 +206,49 @@ angular.module('angularApp')
 			var texto = "";
 			factura.faturaDetalle = $scope.serviciosFactura;
 			factura.usuario = $rootScope.currentUser.idUsuarios;
+				//console.log(data);
 			if($scope.factura.formaPago.nombre.toLocaleLowerCase() == 'contado'.toLocaleLowerCase() || $scope.factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'.toLocaleLowerCase()){
-				texto = "Desea imprimir factura con:\n Serie: "+ factura.serie +" No.: "+factura.numero + "\nAsegurese de tener papel en la impresora";
-			}else{
-				texto = "Desea terminar";
-			}
-			if(confirm(texto)){
-				$http.post(Config.path+'/facturas/crear',factura)
-		  			.success(function (data) {
-		  				//console.log(data);
-		  				if($scope.factura.formaPago.nombre.toLocaleLowerCase() == 'contado'.toLocaleLowerCase() || $scope.factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'.toLocaleLowerCase()){
 
-		  					//sessionStorage.setItem('dataFactura',JSON.stringify(factura));
-			 				var win = gui.Window.open('printFactura.html',{
-			 					"width" : 800,
-			 					"min_width" : 800,
-			 					"max_width" : 800,
-			 					"toolbar": false,
-	  							"frame": true
-			 				});
-			 				localStorage.dataFactura = JSON.stringify(factura);
-			 				//win.eval(null,'sessionStorage.setItem(\'dataFactura\', \''+JSON.stringify(factura)+'\');')
-			 				win.on('close', function() {
-								this.hide(); // Pretend to be closed already
-								console.log("We're closing...");
-								this.close(true);
-								
-							});
-		  				}
-		  				$scope.correlativo  = data;
-		  				$scope.serviciosFactura = [];
-		  				$scope.factura = {};
-		  				$scope.factura.fecha = dateNow();
-		  				$scope.factura.formaPago = $scope.formaPago[0];
-		  				$http.get(Config.path+'/facturas/correlativo')
+					//sessionStorage.setItem('dataFactura',JSON.stringify(factura));
+ 				var win = gui.Window.open('printFactura.html',{
+ 					"width" : 800,
+ 					"min_width" : 800,
+ 					"max_width" : 800,
+ 					"toolbar": true,
+						"frame": true
+ 				});
+ 				factura.path = Config.path;
+ 				localStorage.dataFactura = JSON.stringify(factura);
+ 				//win.eval(null,'sessionStorage.setItem(\'dataFactura\', \''+JSON.stringify(factura)+'\');')
+ 				win.on('close', function() {
+					this.hide(); // Pretend to be closed already
+					this.close(true);
+					console.log(localStorage.dataFactura);
+	  				if(localStorage.dataFactura == ""){
+						//$scope.correlativo  = data;
+	  					$scope.limpiar();
+	  					$http.get(Config.path+'/facturas/correlativo')
 							.success(function (data) {
 								console.log(data);
 								$scope.factura.numero = data[0].numero_actual;
 								$scope.factura.serie = data[0].serie;
-								//$scope.correlativo  = data;
 							})
-							.error(function (data) {
-								console.log(data);
-								alert(data);
-							});
-		  			})
-		  			.error(function  (data) {
-		  				console.log(data);
-		  				alert(data);
-		  			});
+						.error(function (data) {
+							console.log(data);
+							alert('error al traer la nueva serie y numero de factura');
+						});
+	  				}
+	  				
+				});
 			}
-			
-			
+		}
+		$scope.limpiar = function  () {
+			$scope.serviciosFactura = [];
+			$scope.factura = {};
+			$scope.factura.fecha = dateNow();
+			$scope.factura.formaPago = $scope.formaPago[0];
+			$scope.factura.telefono = -10;
+			$scope.factura.edad = -10;
 		}
 		$scope.showServicios = function () {
 			var modalServicios = $modal.open({
