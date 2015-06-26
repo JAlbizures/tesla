@@ -28,11 +28,12 @@
 				<th>Forma de Pago</th>
 				<th>Precio</th>
 				<th>Subtotal</th>
+				<th>Usuario</th>
 			</thead>
 			<tbody >
 				<tr ng-repeat="item in data">
 					<td>{{item.serie}}-{{item.numero}}</td>
-					<td>{{item.fecha | date:'dd/MM/yyyy'}}</td>
+					<td>{{item.fecha_forma}}</td>
 					<td>{{item.nombre}}</td>
 					<td>{{item.paciente}}</td>
 					<td>{{item.direccion}}</td>
@@ -40,6 +41,7 @@
 					<td>{{item.nFormaPago}}</td>
 					<td><span ng-if="item.estado.toLowerCase() == 'anulada'">Anulada</span><span ng-if="item.estado.toLowerCase() !== 'anulada'">{{item.precio |  currency:"Q"}}</span></td>
 					<td><span ng-if="item.estado.toLowerCase() == 'anulada'">Anulada</span><span ng-if="item.estado.toLowerCase() !== 'anulada'">{{item.precio*item.cantidad | currency:"Q"}}</span></td>
+					<td>{{item.usuario}}</td>
 				</tr>
 			</tbody>
 		</table>

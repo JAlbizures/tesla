@@ -218,6 +218,7 @@ angular.module('angularApp')
 						"frame": true
  				});
  				factura.path = Config.path;
+ 				factura.nUsuario = $rootScope.currentUser.usuario;
  				localStorage.dataFactura = JSON.stringify(factura);
  				//win.eval(null,'sessionStorage.setItem(\'dataFactura\', \''+JSON.stringify(factura)+'\');')
  				win.on('close', function() {

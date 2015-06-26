@@ -145,10 +145,13 @@ exports.anular = function  (req,res,next) {
 	})
 }
 exports.facturas = function (req,res) {
-	var query = "SELECT * FROM factura WHERE serie <> '' AND  numero <> 0";
+	var query = "call sp_sel_facturas()";
 	connect.query(query,undefined,function  (row) {
 		console.log(row)
-		res.json(row);
+		if (row.length>0){
+		  res.json(row[0]);
+		}
+		else { res.json(row);}
 	})
 }
 exports.cambiarEstado =function (io) {

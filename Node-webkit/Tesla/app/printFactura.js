@@ -30,14 +30,24 @@ angular.module('app',[])
 							}
 							data += "     " + pad($scope.data.faturaDetalle[index].nombre,45," ") + "  " + pad("Q."+($scope.data.faturaDetalle[index].precio * $scope.data.faturaDetalle[index].cantidad).formatMoney(2),13," ",1) + chr(13) + chr(10);
 						}
+						data +="     " + "Por atención al paciente: "+$scope.data.paciente + chr(13) + chr(10);
 						if($scope.data.montoLetras > 79){
 							$scope.data.montoLetras.substring(0,79);
 						}
+						var f=new Date();
+						var hora= f.getHours();
+						if (hora<10) { hora='0'+hora}
+						var min = f.getMinutes();
+						if (min<10) { min='0'+min}
+						var sec = f.getSeconds();
+						if (sec<10) { sec='0'+sec}
+						var now = hora+":"+min+":"+sec;
+
 						data +=" "+ chr(13)+chr(10);
 						data +="                    *" + $scope.data.montoLetras +'*'+ chr(13) + chr(10);
-						data +="    "+$scope.data.serie + " " + $scope.data.numero;
+						data +="    "+$scope.data.serie + "-" + $scope.data.numero+" ("+$scope.data.nUsuario+")-"+now;
 						var fs = require("fs");
-						//fs.writeFile('c:/sistesla/impresion.txt',data);
+						fs.writeFile('c:/sistesla/impresion.txt',data);
 						
 						var exec = require('child_process').execFile;
 						//exec('c:/sistesla/Imprimir01_vb.exe'); 

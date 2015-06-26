@@ -4,7 +4,7 @@ exports.generarReporteFactura = function (data, callback) {
 	var query = 'call sp_sel_reporte_facturas(?, ?)';	
 	connect.query(query,data,function (rows) {
 
-		//console.log(rows);
+		console.log('de la tabla fac ',rows);
 		if(callback) callback(rows);
 	});
 }

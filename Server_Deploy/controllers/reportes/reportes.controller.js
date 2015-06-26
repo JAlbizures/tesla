@@ -11,7 +11,7 @@ exports.generarReporte = function (req,res) {
 	if(req.query.tipo == 'facturas'){
 		var data = [req.query.fecha1,req.query.fecha2];
 		model.generarReporteFactura(data,function  (row) {
-			//console.log('facturas',row);
+			console.log('facturas gen ',row);
 			res.json(row);
 		});
 		
