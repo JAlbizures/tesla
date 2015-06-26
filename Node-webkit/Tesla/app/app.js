@@ -10,6 +10,7 @@ angular.module('angularApp', [
     $locationProvider.html5Mode(false);
   }).
 	run(function ($rootScope,$location,$state, $http ) {
+    window.addEventListener('keydown',function(e){e.stopPropagation()});
     var data = fs.readFileSync(execPath+'\\conf.json');
     data = JSON.parse(data.toString('utf8'));
     $rootScope.estilo = data.estilo;
@@ -115,6 +116,34 @@ angular.module('angularApp', [
         });
         return obj;
       };
+    })
+    .filter('searchfilterTipo', function() {
+      return function(input, term) {
+        var regex = new RegExp(term || '', 'i');
+        var obj = {};
+        angular.forEach(input, function(v, i){
+          if(regex.test(v['tipo'] + '')){
+            obj[i]=v;
+          }
+        });
+        return obj;
+      };
+    })
+    .directive("limitTo", function() {
+      return {
+        restrict: "A",
+        link: function(scope, elem, attrs) {
+          var limit = parseInt(attrs.limitTo);
+          //console.log(elem);
+          $(elem).on('keyup',function  () {
+            if (this.value.length > limit-1) {
+              //console.log('entro',this.value,this.value.length);
+              $(this).val($(this).val().substr(0,limit));//return false; 
+            }
+          });
+
+        }
+      }
     });
 
 function dateNow () {

@@ -5,6 +5,13 @@
 				<h3 class="modal-title">Elija un servicio</h3>
 			</div>
 			<div class="modal-body">
+				<button ng-click="filtrarPorCategoria('Rx')" class="btn btn-default">Rx</button>
+				<button ng-click="filtrarPorCategoria('Mamo')" class="btn btn-default">Mamo</button>
+				<button ng-click="filtrarPorCategoria('TAC')" class="btn btn-default">TAC</button>
+				<button ng-click="filtrarPorCategoria('US')" class="btn btn-default">US</button>
+				<button ng-click="filtrarPorCategoria('Ekg')" class="btn btn-default">Ekg</button>
+				<button ng-click="filtrarPorCategoria('Tarjeta')" class="btn btn-default">Tarjeta</button>
+				<hr/>
 				<div class="form-group"><label for="" >Buscar</label> <input class="form-control" style="width: auto;display : inline-block" type="text" ng-model="servicioBusqueda"></div>
 				<table class="table table-modal table-striped">
 					<thead>
@@ -14,7 +21,7 @@
 						<th>Precio</th>
 					</thead>
 					<tbody >
-						<tr ng-show="precios[item.idServicio][formaPago.idFormaPago] > 0" ng-click="toggleServicio(item)" id="{{item.idServicio}}" ng-repeat="item in servicios | searchfilter:servicioBusqueda" > 
+						<tr ng-show="precios[item.idServicio][formaPago.idFormaPago] > 0" ng-click="toggleServicio(item)" id="{{item.idServicio}}" ng-repeat="item in servicios | searchfilter:servicioBusqueda | searchfilterTipo:searchTipo"  > 
 							<td >{{item.idServicio}}</td>
 							<td >{{item.tipo}}</td>
 							<td class="td-nombre2">{{item.nombre}}</td> 
@@ -29,7 +36,7 @@
 			</div>
 		</div>	
 	</script>
-	
+
 	<div class="">
     	<div class="col-lg-12">
     		<button  class="btn btn-default pull-right" ng-click="limpiar()" >Limpiar</button>
@@ -45,7 +52,7 @@
 				</div>
 				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.telefono.$valid && serviciosFactura.length != 0}">
 					<label for="" class="block">Telefono</label>
-					<input type="number" min="10000000" max="99999999" name="telefono" class="form-control" ng-model="factura.telefono" placeholder="Telefono" required>
+					<input type="number" min="10000000" max="99999999" limit-to="8" name="telefono" class="form-control" ng-model="factura.telefono" placeholder="Telefono" required>
 				</div>
 				<div class="form-group" ng-show="false">
 					<label for="" class="block">Monto</label>

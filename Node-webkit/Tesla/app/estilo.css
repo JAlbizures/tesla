@@ -58,6 +58,14 @@ td{
 }
 .navbar.navbar-default{
     border-radius: 0;
+    /*position: relative;*/
+}
+.nombre-navbar{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    font-size: 18px;
+    z-index: 9999999999999;
 }
 .block{
     display: block;
