@@ -17,6 +17,7 @@
 				<div class="form-group">
 					<p ng-show="(fecha1 == null || fecha2 == null) && filtro" class="text-danger">Agrege un rango de fechas</p>
 				</div>
+				<label>Busqueda: <input ng-model="search.$"></label>
 			</form>	
 			<br>
 			<table class="table table-striped">
@@ -29,7 +30,7 @@
 
 				</thead>
 				<tbody>
-					<tr ng-show="filtrar(item.fecha)" id="{{item.idFactura}}" ng-repeat="item in facturas">
+					<tr ng-show="filtrar(item.fecha)" id="{{item.idFactura}}" ng-repeat="item in facturas | filter:search">
 						<td>{{item.serie}}</td>
 						<td>{{item.numero}}</td>
 						<td>{{item.nombre}}</td>
