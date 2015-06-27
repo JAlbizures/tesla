@@ -5,12 +5,13 @@
 				<h3 class="modal-title">Elija un servicio</h3>
 			</div>
 			<div class="modal-body">
-				<button ng-click="filtrarPorCategoria('Rx')" class="btn btn-default">Rx</button>
-				<button ng-click="filtrarPorCategoria('Mamo')" class="btn btn-default">Mamo</button>
-				<button ng-click="filtrarPorCategoria('TAC')" class="btn btn-default">TAC</button>
-				<button ng-click="filtrarPorCategoria('US')" class="btn btn-default">US</button>
-				<button ng-click="filtrarPorCategoria('Ekg')" class="btn btn-default">Ekg</button>
-				<button ng-click="filtrarPorCategoria('Tarjeta')" class="btn btn-default">Tarjeta</button>
+				<button ng-click="filtrarPorCategoria('Rx')" class="btn btn-default" ng-class="{'btn-primary' : searchTipo == 'Rx' }">Rx</button>
+				<button ng-click="filtrarPorCategoria('Mamo')" class="btn btn-default" ng-class="{'btn-primary' : searchTipo == 'Mamo' }">Mamo</button>
+				<button ng-click="filtrarPorCategoria('TAC')" class="btn btn-default" ng-class="{'btn-primary' : searchTipo == 'TAC' }">TAC</button>
+				<button ng-click="filtrarPorCategoria('US')" class="btn btn-default" ng-class="{'btn-primary' : searchTipo == 'US' }">US</button>
+				<button ng-click="filtrarPorCategoria('Ekg')" class="btn btn-default" ng-class="{'btn-primary' : searchTipo == 'Ekg' }">Ekg</button>
+				<button ng-click="filtrarPorCategoria('Tarjeta')" class="btn btn-default" ng-class="{'btn-primary' : searchTipo == 'Tarjeta' }">Tarjeta</button>
+				<button ng-click="filtrarPorCategoria(null)" class="btn btn-default" >Quitar filtro</button>
 				<hr/>
 				<div class="form-group"><label for="" >Buscar</label> <input class="form-control" style="width: auto;display : inline-block" type="text" ng-model="servicioBusqueda"></div>
 				<table class="table table-modal table-striped">
