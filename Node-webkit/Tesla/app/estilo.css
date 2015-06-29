@@ -8,6 +8,9 @@ table.table{
     width: auto;
 
 }
+table.table.servicios{
+     height: 430px;
+}
 .td-nombre2{
     max-width: 300px;
     overflow: hidden;    
@@ -52,6 +55,10 @@ th{
     width: 100%;
     background: white;*/
 }
+div.col-lg-12{
+    margin-top: -20px;
+    padding-top: 20px;
+}
 td{
     padding: 10px;
     vertical-align: middle !important;
@@ -66,7 +73,11 @@ td{
     right: 0px;
     font-size: 18px;
     z-index: 9999999999999;
+    width: 100%;
+    background: white;
+    text-align: right;
 }
+
 .block{
     display: block;
 }
