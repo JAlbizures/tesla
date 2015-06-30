@@ -241,6 +241,22 @@ angular.module('angularApp')
 	  				}
 	  				
 				});
+			}else if(confirm("Desea terminar")){
+				factura.nUsuario = $rootScope.currentUser.usuario;
+				$http.post(Config.path+'/facturas/crear',factura)
+		  			.success(function (result) {
+						$scope.limpiar();
+	  					$http.get(Config.path+'/facturas/correlativo')
+							.success(function (data) {
+								console.log(data);
+								$scope.factura.numero = data[0].numero_actual;
+								$scope.factura.serie = data[0].serie;
+							})
+					})
+					.error(function(data){
+						alert("Error al guardar");
+						console.log(data);
+					});
 			}
 		}
 		$scope.limpiar = function  () {

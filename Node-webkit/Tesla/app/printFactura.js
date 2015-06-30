@@ -8,11 +8,11 @@ angular.module('app',[])
 		$scope.data.fecha = $scope.data.fecha.split('-');
 		console.log($scope.data.fecha);
 		$scope.imprimir = function () {
-			if($scope.data.formaPago.nombre.toLocaleLowerCase() == 'contado'.toLocaleLowerCase() || $scope.data.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'.toLocaleLowerCase()){
+			//if($scope.data.formaPago.nombre.toLocaleLowerCase() == 'contado'.toLocaleLowerCase() || $scope.data.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'.toLocaleLowerCase()){
 				texto = "Desea imprimir factura con:\n Serie: "+ $scope.data.serie +" No.: "+$scope.data.numero + "\nAsegurese de tener papel en la impresora";
-			}else{
-				texto = "Desea terminar";
-			}
+			//}else{
+				
+			//}
 			if(confirm(texto)){
 				$http.post($scope.data.path+'/facturas/crear',$scope.data)
 		  			.success(function (result) {

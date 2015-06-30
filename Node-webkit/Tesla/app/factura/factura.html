@@ -140,12 +140,17 @@
 					<input type="text" class="form-control" name="direccion"  ng-model="factura.direccion"  placeholder="Direccion" required>
 				</div>
 				<div class="form-group" ng-class="{'has-error' : !formAgregarFactura.formaPagoRef.$valid && serviciosFactura.length != 0}" ng-show="factura.formaPago.nombre.toLocaleLowerCase() != 'contado'">
+<!--				
 					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" for="" class="block">No. de autorización</label>
 					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'seguro'" for="" class="block">No. de poliza</label>
 					<label ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'igss'" for="" class="block">No. de carnet del IGSS</label>
 					<input ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" placeholder="No. de autorización" type="text" style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
 					<input ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'seguro'" type="text" placeholder="No. de poliza"  style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
 					<input ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'igss'" type="text" placeholder="No. de carnet del IGSS" style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" required>
+-->
+					<label for="" class="block">Dato de referencia</label>
+					<input placeholder="No. de autorización" type="text" style="width : 150px" class="form-control" name="formaPagoRef"  ng-model="factura.formaPagoRef" >
+					
 				</div>
 				<button type="submit"  ng-show="factura.formaPago.nombre.toLocaleLowerCase() != 'contado' && factura.formaPago.nombre.toLocaleLowerCase() != 'tarjeta de credito'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.formaPagoRef.$valid || !formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
 				<button type="submit" ng-show="factura.formaPago.nombre.toLocaleLowerCase() == 'contado' || factura.formaPago.nombre.toLocaleLowerCase() == 'tarjeta de credito'" ng-click="terminarFactura(factura)"   class="btn btn-default bottom" ng-disabled="(!formAgregarFactura.serie.$valid || !formAgregarFactura.paciente.$valid || !formAgregarFactura.edad.$valid || !formAgregarFactura.telefono.$valid || !formAgregarFactura.formaPago.$valid || !formAgregarFactura.nit.$valid || !formAgregarFactura.numero.$valid ||  !formAgregarFactura.nombre.$valid  || !formAgregarFactura.direccion.$valid) || numeroValido || serviciosFactura.length == 0">Terminar Factura</button>
