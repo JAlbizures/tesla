@@ -7,11 +7,11 @@ angular.module('angularApp')
  		console.log(Config.list);
  		
  		$scope.configuracionOrder = function  () {
-	 		for(var index in Config.list){
-	 			$scope.configuracion[Config.list[index].nombre] = {};
-	 			$scope.configuracion[Config.list[index].nombre].dato = Config.list[index].dato;
-	 			$scope.configuracion[Config.list[index].nombre].titulo =  Config.list[index].titulo;
-	 			$scope.configuracion[Config.list[index].nombre].idConfig =  Config.list[index].idConfig;
+	 		for(var index in $rootScope.config){
+	 			$scope.configuracion[$rootScope.config[index].nombre] = {};
+	 			$scope.configuracion[$rootScope.config[index].nombre].dato = $rootScope.config[index].dato;
+	 			$scope.configuracion[$rootScope.config[index].nombre].titulo =  $rootScope.config[index].titulo;
+	 			$scope.configuracion[$rootScope.config[index].nombre].idConfig =  $rootScope.config[index].idConfig;
 	 		}	
  		}
  		$scope.configuracionOrder();
@@ -23,6 +23,7 @@ angular.module('angularApp')
  		$scope.guardarConfiguracion = function  (config) {
  			$http.put(Config.path+'/config',config)
  				.success(function (data) {
+ 					console.info(data);
  					$rootScope.config = [];
  					for(var index in data){
 						var temp = {};
@@ -34,7 +35,7 @@ angular.module('angularApp')
 						if(data[index].tipo == 'number'){
 							temp.dato = parseInt(data[index].dato);
 						} else if(data[index].tipo == 'checkbox'){
-							console.log(data[index].dato);
+							
 							temp.dato = 'true' == data[index].dato;
 						} else if(data[index].tipo == 'text'){
 							temp.dato = data[index].dato
@@ -45,12 +46,13 @@ angular.module('angularApp')
 						}
 						$rootScope.config.push(temp);
 					}
+					console.warn($rootScope.config);
 					Config.update($rootScope.config);
 					$scope.configuracionOrder();
 					$scope.guardado = true;
 					$timeout(function () {
 						$scope.guardado = false;
-					}, 500);	
+					}, 5000);	
 				})
  				.error(function (data) {
  					alert(data);

@@ -62,13 +62,13 @@ angular.module('angularApp', [
     	};
   	})
   .factory('Config', function ($rootScope) {	
-  	   var list = $rootScope.config;
+  	   //var list = $rootScope.config;
   		return {
-        'list' :list,
+        'list' :$rootScope.config,
         'path' : $rootScope.path,
         'update' : function  (configuracion) {
-          console.log('cambio',list);
-          list = configuracion;
+          //console.log('cambio',list);
+          //list = configuracion;
         }
       };
   	})

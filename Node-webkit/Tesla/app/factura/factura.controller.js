@@ -13,9 +13,9 @@ angular.module('angularApp')
 		$scope.editando = false;
 		$scope.correlativo = {};
 		
-		for(index in Config.list){
-			if(Config.list[index].tipo == 'checkbox'){
-				$scope[Config.list[index].nombre] = Config.list[index].dato;
+		for(index in $rootScope.config){
+			if($rootScope.config[index].tipo == 'checkbox'){
+				$scope[$rootScope.config[index].nombre] = $rootScope.config[index].dato;
 			}
 		}
 		console.log('$scope',$scope);
