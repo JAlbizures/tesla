@@ -1,7 +1,8 @@
 
 angular.module('angularApp')
- 	.controller('configuracionCtrl',function (Auth, Config, $scope, $http,$rootScope) {
+ 	.controller('configuracionCtrl',function (Auth, Config, $scope, $http,$rootScope, $timeout) {
  		Auth.currentUser();
+ 		$scope.guardado = false;
  		$scope.configuracion = {};
  		console.log(Config.list);
  		
@@ -45,7 +46,11 @@ angular.module('angularApp')
 						$rootScope.config.push(temp);
 					}
 					Config.update($rootScope.config);
-					$scope.configuracionOrder();	
+					$scope.configuracionOrder();
+					$scope.guardado = true;
+					$timeout(function () {
+						$scope.guardado = false;
+					}, 500);	
 				})
  				.error(function (data) {
  					alert(data);

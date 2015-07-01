@@ -1,6 +1,6 @@
 <div>
-	<div class="col-md-7 col-md-offset-1">
-		<form class="col-md-8" name="formConfiguracion" ng-submit="guardarConfiguracion(configuracion)" >
+	<div class="col-md-6 col-md-offset-2">
+		<form class="" name="formConfiguracion" ng-submit="guardarConfiguracion(configuracion)" >
 			
 				<!-- <div style="display: inline-block;vertical-align: top; margin: 0 20px" class="form-group" ng-repeat="item in config">
 					<label  >{{item.titulo}}</label>
@@ -26,5 +26,7 @@
 			</div>
 			<button  class="btn btn-default" type="submit">Guardar</button>
 		</form>
+		<br>
+		<span ng-show="guardado" class="alert alert-success">Se a guardado correctamente</span>
 	</div>
 </div>
