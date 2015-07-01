@@ -50,7 +50,7 @@ angular.module('app',[])
 						fs.writeFile('c:/sistesla/impresion.txt',data);
 						
 						var exec = require('child_process').execFile;
-						//exec('c:/sistesla/Imprimir01_vb.exe'); 
+						exec('c:/sistesla/Imprimir01_vb.exe'); 
 
 						var gui = require('nw.gui');
 						var win = gui.Window.get();
