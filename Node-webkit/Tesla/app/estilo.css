@@ -8,12 +8,31 @@ table.table{
     width: auto;
 
 }
+.load{
+  position: fixed;
+  z-index: 99999999999999999999999999999999999;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+}
+.load img{
+  width: 76px;
+  height: 76px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -38px;
+  margin-top: -38px;
+}
 table.table.servicios{
      height: 430px;
 }
 .td-nombre2{
     max-width: 300px;
-    overflow: hidden;    
+    overflow: hidden;
 }
 .td-nombre{
     max-width: 500px;
@@ -48,7 +67,7 @@ select{
 th{
     padding: 10px;
 }
-    
+
 .table >thead{
 /*    top: 0;
     position: absolute;

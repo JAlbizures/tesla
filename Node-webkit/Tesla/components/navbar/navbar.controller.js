@@ -1,6 +1,13 @@
 angular.module('angularApp')
   .controller('NavbarCtrl', function ($scope, $location,$rootScope, $modal) {
     $scope.menu = [];
+    // $
+    // $scope.$watch(function () {
+    //   return $rootScope.load;
+    // },function (newV,oldV) {
+    //
+    // });
+    
     $rootScope.$watch('currentUser',function (currentUser) {
       //console.log('currentUser',currentUser);
       if(currentUser){
@@ -47,7 +54,7 @@ angular.module('angularApp')
             'path' : '/configuracion'
           })
         }
-       
+
         // $scope.menu.push({
         //     'name': 'estilo',
         //     'path' : '/estilo'

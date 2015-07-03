@@ -1,10 +1,11 @@
 var connect = require('../../utils/connect');
 
 exports.generarReporteFactura = function (data, callback) {
-	var query = 'call sp_sel_reporte_facturas(?, ?)';	
+	var query = 'call sp_sel_reporte_facturas(?, ?)';
+	console.log(data);
 	connect.query(query,data,function (rows) {
 
-		console.log('de la tabla fac ',rows);
+		//console.log('de la tabla fac ',rows);
 		if(callback) callback(rows);
 	});
 }
@@ -13,7 +14,7 @@ exports.generarReporteServicios = function (callback) {
 	var query = "call sp_sel_reporte_servicios()"
 	//var query = "SELECT `nombre`,`idServicio` , `numeroserial`, `tipo` FROM `servicio`";
 	connect.query(query, undefined, function (rows) {
-		
+
 		//console.log(rows);
 		if(callback) callback(rows);
 	});
@@ -23,7 +24,7 @@ exports.generarReporteServiciosNoFacturados = function (callback) {
 	var query = "call sp_sel_reporte_serv_no_fact()";
 	connect.query(query, undefined, function (rows) {
 
-		
+
 		//console.log(rows);
 		if(callback) callback(rows);
 	});

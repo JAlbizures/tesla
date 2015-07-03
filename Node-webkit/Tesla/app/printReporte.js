@@ -2,15 +2,15 @@ angular.module('app',[])
 	.controller('appCtrl',function ($scope,$timeout,$http , $location	) {
 		$scope.estado = true;
 		$scope.fecha = Date.now();
-		$scope.url = sessionStorage.getItem('host');
-		var reporte = $scope.reporte = JSON.parse(sessionStorage.getItem('reporte'));	
+		$scope.url = JSON.parse(localStorage.host);//sessionStorage.getItem('host');
+		var reporte = $scope.reporte = JSON.parse(localStorage.reporte);// JSON.parse(sessionStorage.getItem('reporte'));
 		console.log($scope.reporte);
 		//if($scope.reporte.tipo == 'Contado'){
-		var datos = $scope.data = JSON.parse(sessionStorage.getItem('data'))[0];	
+		var datos = $scope.data = JSON.parse(localStorage.data)[0];//JSON.parse(sessionStorage.getItem('data'))[0];
 		//}else{
 		//	$scope.data = JSON.parse(sessionStorage.getItem('data'));
 		//}
-		
+
 		//console.log($scope.data);
 		$scope.imprimir = function () {
 			// $scope.estado = false;
@@ -31,21 +31,21 @@ angular.module('app',[])
 				var data = {
 					"services" : datos
 				}
-				window.location.replace($scope.url + '/reportes/servicios/pdf?reporte='+ JSON.stringify(data));	
+				window.location.replace($scope.url + '/reportes/servicios/pdf?reporte='+ JSON.stringify(data));
 			}else if($scope.reporte.tipo == "facturas"){
 				var data = {
 					"facturas" : datos,
 					"dataReporte" : reporte
 				}
-				window.location.replace($scope.url + '/reportes/facturas/pdf?reporte='+ JSON.stringify(data));	
+				window.location.replace($scope.url + '/reportes/facturas/pdf?reporte='+ JSON.stringify(data));
 			}else if($scope.reporte.tipo == "serviciosNoFacturados"){
 				var data = {
 					"facturas" : datos,
 					"dataReporte" : reporte
 				}
-				window.location.replace($scope.url + '/reportes/serviciosNoFacturados/pdf?reporte='+ JSON.stringify(data));	
+				window.location.replace($scope.url + '/reportes/serviciosNoFacturados/pdf?reporte='+ JSON.stringify(data));
 			}
-			
+
 			//$location.path('/reportes/pdf').search({'reporte': $(document.body).html()});
 		}
 		$scope.setOrder = function (order) {
@@ -53,6 +53,6 @@ angular.module('app',[])
         	$scope.revers = !$scope.revers;
     	};
     	$scope.setReverse = function () {
-    		
+
     	}
 	});

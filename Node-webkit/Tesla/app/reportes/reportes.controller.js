@@ -8,26 +8,28 @@ angular.module('angularApp')
  		$scope.reporte.tipo = 'facturas';
 
  		$scope.generarReporte = function () {
- 			$http.get(Config.path+'/reportes?tipo='+$scope.reporte.tipo+'&fecha1='+$scope.reporte.fecha1+'&fecha2='+$scope.reporte.fecha2)
+ 			$http.get(Config.path+'/reportes?tipo='+$scope.reporte.tipo+'&fecha1='+new Date($scope.reporte.fecha1 + " 00:00:00")+'&fecha2='+new Date($scope.reporte.fecha2 + " 23:59:59"))
 	 			.success(function (data) {
 
 	 				if(data.length > 0){
-	 					
-		 				sessionStorage.setItem('data',JSON.stringify(data));
-		 				sessionStorage.setItem('host',Config.path);
+
+		 				//sessionStorage.setItem('data',JSON.stringify(data));
+		 				//sessionStorage.setItem('',Config.path);
+            localStorage.data = JSON.stringify(data);
+            localStorage.host = JSON.stringify(Config.path);
 		 				var reporte = {};
 
 		 				reporte.fecha1 = $scope.reporte.fecha1;
 						reporte.fecha2 = $scope.reporte.fecha2;
 						reporte.tipo = $scope.reporte.tipo;
-		 				sessionStorage.setItem('reporte',JSON.stringify(reporte));
-		 				window.open('printReporte.html',{
-		 					"width" : 900,
-		 					"min_width" : 500,
-		 					"max_width" : 1000,
-		 					"toolbar": false,
-  							"frame": true
-		 				});
+		 				localStorage.reporte = JSON.stringify(reporte);
+            //sessionStorage.setItem('reporte',JSON.stringify(reporte));
+            var win = gui.Window.open('printReporte.html',{
+              "width" : 800,
+              "min_width" : 800,
+              "toolbar": true,
+               "frame": true
+            });
 	 				}
 	 				console.log(data);
 	 			}).error(function (data) {

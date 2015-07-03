@@ -41,11 +41,14 @@ angular.module('angularApp')
 
     $scope.filtrar = function (fecha) {
       if($scope.filtro && $scope.fecha1 != null && $scope.fecha2 != null){
-         console.log(fecha.substring(0,10),$scope.fecha1,$scope.fecha2);
-        if(fecha.substring(0,10) == $scope.fecha1 || fecha.substring(0,10) == $scope.fecha2){
+        fecha = new Date(fecha);
+        var fecha1 = new Date($scope.fecha1 + " 00:00:00");
+        var fecha2 = new Date($scope.fecha2 + " 23:59:59");
+        //console.log(fecha,fecha1,fecha2);
+        if(fecha == fecha1 || fecha == fecha2){
           return true;
         }
-        if(fecha.substring(0,10) >= $scope.fecha1 && fecha.substring(0,10) <= $scope.fecha2){
+        if(fecha >= fecha1 && fecha <= fecha2){
           return true;
         }else{
 
