@@ -24,7 +24,7 @@ angular.module('angularApp')
 						reporte.tipo = $scope.reporte.tipo;
 		 				localStorage.reporte = JSON.stringify(reporte);
             //sessionStorage.setItem('reporte',JSON.stringify(reporte));
-            var win = gui.Window.open('printReporte.html',{
+            var win = gui.Window.open('visor/web/viewer.html',{
               "width" : 800,
               "min_width" : 800,
               "toolbar": true,
