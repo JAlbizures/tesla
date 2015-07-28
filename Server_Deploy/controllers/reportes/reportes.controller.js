@@ -60,8 +60,8 @@ exports.generarSericiosPDF = function (req,res) {
 		data : JSON.parse(req.query.reporte)
 	}).then(function(out) {
 	 	console.log('out');
-	 	out.stream.pipe(res);
-	    //out.result.pipe(res);
+	 	//out.stream.pipe(res);
+	    out.result.pipe(res);
 	}).fail(function (e) {
         console.log(e);
     });
@@ -84,8 +84,8 @@ exports.generarFacturasPDF = function (req,res) {
 		data : JSON.parse(req.query.reporte)
 	}).then(function(out) {
 	 	console.log('out');
-	    out.stream.pipe(res);
-	    //out.result.pipe(res);
+	    //out.stream.pipe(res);
+	    out.result.pipe(res);
 	}).fail(function (e) {
         console.log(e);
     });
@@ -106,8 +106,8 @@ exports.generarServiciosNoFacturadosPDF = function (req,res) {
 		data : JSON.parse(req.query.reporte)
 	}).then(function(out) {
 	 	console.log('out');
-	    out.stream.pipe(res);
-	    //out.result.pipe(res);
+	    //out.stream.pipe(res);
+	    out.result.pipe(res);
 	}).fail(function (e) {
         console.log(e);
     });
